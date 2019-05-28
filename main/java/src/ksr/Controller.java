@@ -1,4 +1,4 @@
-package sample;
+package ksr;
 
 public class Controller {
 }
