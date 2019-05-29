@@ -21,21 +21,23 @@ public class FuzzySet<ElemType> {
 
     public static <T> FuzzySet<T> intersection(FuzzySet<T> set1, FuzzySet<T> set2){
         FuzzySet<T> result = new FuzzySet<T>();
-        for(Map.Entry<T, Double> entry : set1.entrySet()){
-            if (set2.set.containsKey(entry.getKey())){
-                result.set.put(entry.getKey(), Double.min(entry.getValue(), set2.set.get(entry.getKey())));
+        for(T key : commonElementsSet(set1, set2)){
+            if (set1.set.containsKey(key) && set2.set.containsKey(key)){
+                result.set.put(key, Double.min(set1.set.get(key), set2.set.get(key)));
             }
         }
         return result;
     }
 
     public static <T> FuzzySet<T> sum(FuzzySet<T> set1, FuzzySet<T> set2){
-        FuzzySet<T> result = new FuzzySet<T>(set1);
-        for(Map.Entry<T, Double> entry : set2.entrySet()){
-            if (result.set.containsKey(entry.getKey())){
-                result.set.put(entry.getKey(), Double.max(entry.getValue(), result.set.get(entry.getKey())));
-            }else{
-                result.set.put(entry.getKey(), entry.getValue());
+        FuzzySet<T> result = new FuzzySet<T>();
+        for(T key : commonElementsSet(set1, set2)){
+            if (set1.set.containsKey(key) && set2.set.containsKey(key)){
+                result.set.put(key, Double.max(set1.set.get(key), set2.set.get(key)));
+            } else if (set1.set.containsKey(key)) {
+                result.set.put(key, set1.set.get(key));
+            } else if (set2.set.containsKey(key)){
+                result.set.put(key, set2.set.get(key));
             }
         }
         return result;
@@ -47,7 +49,6 @@ public class FuzzySet<ElemType> {
 
     public Set<ElemType> support() {
         return set.entrySet().stream()
-                .filter(e -> e.getValue() > 0)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
@@ -61,6 +62,9 @@ public class FuzzySet<ElemType> {
     }
 
     public double set(ElemType element, double degree) {
+        if (degree == 0) {
+            return 0;
+        }
         Double res = set.put(element, degree);
         if(res != null){
             return res;
@@ -69,7 +73,9 @@ public class FuzzySet<ElemType> {
     }
 
     public void add(ElemType element, double degree){
-        set.put(element, degree);
+        if (degree != 0) {
+            set.put(element, degree);
+        }
     }
 
     public void remove(ElemType element) {
@@ -82,5 +88,12 @@ public class FuzzySet<ElemType> {
 
     public Collection<Double> values() {
         return set.values();
+    }
+
+    private static <T> Set<T> commonElementsSet(FuzzySet<T> set1, FuzzySet<T> set2){
+        Set<T> elements = new HashSet<>();
+        elements.addAll(set1.set.keySet());
+        elements.addAll(set2.set.keySet());
+        return elements;
     }
 }
