@@ -20,6 +20,20 @@ public class IntRange implements Range {
         this.end = end;
     }
 
+    void add(IntRange other){
+        begin = Math.min(begin, other.begin);
+        end = Math.max(end, other.end);
+    }
+
+    void intersect(IntRange other){
+        begin = Math.max(begin, other.begin);
+        end = Math.min(end, other.end);
+        if(begin > end){
+            begin = 0;
+            end = 0;
+        }
+    }
+
     @Override
     public int compareTo(Range range) {
         if(this.begin < ((IntRange)range).begin && this.end < ((IntRange)range).end){

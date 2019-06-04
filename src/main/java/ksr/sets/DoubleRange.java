@@ -20,6 +20,20 @@ public class DoubleRange implements Range {
         this.end = end;
     }
 
+    void add(DoubleRange other){
+        begin = Math.min(begin, other.begin);
+        end = Math.max(end, other.end);
+    }
+
+    void intersect(DoubleRange other){
+        begin = Math.max(begin, other.begin);
+        end = Math.min(end, other.end);
+        if(begin > end){
+            begin = 0;
+            end = 0;
+        }
+    }
+
     @Override
     public int compareTo(Range range) {
         if(this.begin < ((DoubleRange)range).begin && this.end < ((DoubleRange)range).end){
