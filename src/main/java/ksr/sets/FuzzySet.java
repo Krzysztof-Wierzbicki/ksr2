@@ -1,7 +1,6 @@
 package ksr.sets;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class FuzzySet<ElemType> {
 
@@ -43,14 +42,8 @@ public class FuzzySet<ElemType> {
         return result;
     }
 
-    public Set<ElemType> universe() {
-        return set.keySet();
-    }
-
     public Set<ElemType> support() {
-        return set.entrySet().stream()
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet());
+        return set.keySet();
     }
 
     public Set<Map.Entry<ElemType, Double>> entrySet(){
