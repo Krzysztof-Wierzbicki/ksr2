@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseSetup {
-    public static void init() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./h2test");
+    public static void init() throws SQLException, ClassNotFoundException {
+        Connection connection = DriverManager.getConnection("jdbc:h2:./ksrdatabase");
         var setup = "create table if not exists FEMALES(" +
                 "id integer primary key," +
                 "race varchar(50)," +
@@ -17,17 +17,17 @@ public class DatabaseSetup {
                 "maxGrade integer," +
                 "completed boolean," +
                 "degree varchar(50)," +
-                "pregnancyCount integer," +
-                "marriageCount integer," +
+                "pregnancyCount varchar(50)," +
+                "marriageCount varchar(50)," +
                 "religion varchar(50)," +
                 "everWorked boolean," +
                 "workType varchar(50)," +
-                "weight integer," +
-                "height integer" +
-                "earnings integer" +
-                ") as select" +
-                "id,race,age,marital status,kids no,school type,maxgrade,comleted,degree,pregnancy count,marriage count,religion,ever worked,work type,weight (kg),height (cm),earnings ($)" +
-                "from CSVREAD('data.csv');";
+                "weight varchar(50)," +
+                "height varchar(50)," +
+                "earnings varchar(50)" +
+                ") as select " +
+                "id,race,age,marital_status,kids_no,school_type,maxgrade,comleted,degree,pregnancy_count,marriage_count,religion,ever_worked,work_type,weight,height,earnings " +
+                "from CSVREAD('./src/main/resources/data.csv');";
         var controller = connection.createStatement();
         controller.execute(setup);
         controller.close();

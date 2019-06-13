@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 public class MainTerminal {
 
-    public static void main(String[] args) throws SQLException {
-        System.out.println("witam");
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println("siema\n" +
+                System.getProperty("user.dir") +
+                "doing stuff");
         DatabaseSetup.init();
     }
 }

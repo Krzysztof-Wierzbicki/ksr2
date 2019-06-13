@@ -1,4 +1,4 @@
-id,race,age,marital status,kids no,school type,maxgrade,comleted,degree,pregnancy count,marriage count,religion,ever worked,work type,weight (kg),height (cm),earnings ($)
+id,race,age,marital_status,kids_no,school_type,maxgrade,comleted,degree,pregnancy_count,marriage_count,religion,ever_worked,work_type,weight,height,earnings
 40081,white,33,married,0,college,6,True,Master,0,1,None,True,full-time,56,163,60000
 32817,other,27,never married,0,college,6,True,Bachelor,0,None,protestant,True,full-time,73,165,35000
 39968,white,37,never married,0,college,7,True,Master,2,None,protestant,True,full-time,70,168,2137000
