@@ -14,10 +14,10 @@ public class Loader {
     }
 
     public static ArrayList<EntityDB> loadDatabaseToDbModel() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./ksrdatabase");
-        String sql = "select * from FEMALES";
+        Connection connection = DriverManager.getConnection(DatabaseSetup.CONNECTION_STRING);
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSet resultSet = statement.executeQuery("select * from FEMALES");
+
         ArrayList<EntityDB> entityDBs = new ArrayList<>();
         while (resultSet.next()) {
             EntityDB entityDB = new EntityDB(
@@ -42,14 +42,16 @@ public class Loader {
             entityDBs.add(entityDB);
         }
 
+        statement.close();
+        connection.close();
         return entityDBs;
     }
 
     public static ArrayList<Entity> loadDbModelToModel(List<EntityDB> entityDBs) {
         ArrayList<Entity> entities = new ArrayList<>();
 
-        for (EntityDB e : entityDBs) {
-            entities.add(new Entity(e));
+        for (EntityDB entityDB : entityDBs) {
+            entities.add(new Entity(entityDB));
         }
 
         return entities;

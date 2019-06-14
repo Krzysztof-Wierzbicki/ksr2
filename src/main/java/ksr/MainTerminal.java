@@ -13,10 +13,7 @@ public class MainTerminal {
         System.out.println("siema\n" +
                 System.getProperty("user.dir"));
         DatabaseSetup.init();
-
         ArrayList<Entity> entities = Loader.loadDatabaseToModel();
-        for (Entity e : entities) {
-            System.out.println(e);
-        }
+        System.out.println(entities.get(0));
     }
 }

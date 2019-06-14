@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseSetup {
+
+    public static String CONNECTION_STRING = "jdbc:h2:./ksrdatabase";
+
     public static void init() throws SQLException, ClassNotFoundException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./ksrdatabase");
+        Connection connection = DriverManager.getConnection(CONNECTION_STRING);
         String setup = "create table if not exists FEMALES(" +
                 "id integer primary key," +
                 "race varchar(50)," +
