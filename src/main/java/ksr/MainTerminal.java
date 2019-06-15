@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class MainTerminal {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException {
         System.out.println("siema\n" +
                 System.getProperty("user.dir"));
         DatabaseSetup.init();
