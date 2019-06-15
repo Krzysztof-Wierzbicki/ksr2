@@ -12,6 +12,12 @@ public class TriangleMembership implements Function<Double, Double> {
         this.c = c;
     }
 
+    public TriangleMembership(int a, int b, int c) {
+        this.a = (double) a;
+        this.b = (double) b;
+        this.c = (double) c;
+    }
+
     @Override
     public Double apply(Double x) {
         if (a <= x && x <= b) {

@@ -2,15 +2,22 @@ package ksr.calculations;
 
 import java.util.function.Function;
 
-public class TrapesoidMembership implements Function<Double, Double> {
+public class TrapezoidMembership implements Function<Double, Double> {
 
     private Double a, b, c, d;
 
-    public TrapesoidMembership(Double a, Double b, Double c, Double d) {
+    public TrapezoidMembership(Double a, Double b, Double c, Double d) {
         this.a = a;
         this.b = b;
         this.c = c;
         this.d = d;
+    }
+
+    public TrapezoidMembership(int a, int b, int c, int d) {
+        this.a = (double) a;
+        this.b = (double) b;
+        this.c = (double) c;
+        this.d = (double) d;
     }
 
     @Override

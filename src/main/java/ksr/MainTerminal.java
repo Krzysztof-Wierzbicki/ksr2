@@ -6,6 +6,9 @@ import ksr.model.Entity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MainTerminal {
 
@@ -14,6 +17,11 @@ public class MainTerminal {
                 System.getProperty("user.dir"));
         DatabaseSetup.init();
         ArrayList<Entity> entities = Loader.loadDatabaseToModel();
-        System.out.println(entities.get(0));
+
+        Set<Object> set = new TreeSet<>();
+        for (Entity entity : entities) {
+            set.add(entity.earnings);
+        }
+        System.out.println(set);
     }
 }
