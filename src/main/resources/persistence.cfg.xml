@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<persistence>
+    <persistence-unit name="openjpa">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <class>ksr.model.EntityDB</class>
+        <properties>
+            <property name="openjpa.ConnectionURL" value="jdbc:h2:./ksrdatabase"/>
+            <property name="openjpa.ConnectionDriverName" value="org.h2.Driver"/>
+            <!--property name="openjpa.ConnectionUserName" value="sa"/>
+            <property name="openjpa.ConnectionPassword" value=""/-->
+            <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
+        </properties>
+    </persistence-unit>
+</persistence>
