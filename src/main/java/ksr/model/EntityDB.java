@@ -20,8 +20,6 @@ public class EntityDB {
     public String height;
     public String earnings;
 
-    public EntityDB() {}
-
     public EntityDB(int id, String race, int age, String maritalStatus, int numberOfKids,
                     String schoolType, int maxGrade, boolean completed, String degree,
                     String pregnancyCount, String marriageCount, String religion,

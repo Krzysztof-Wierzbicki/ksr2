@@ -1,5 +1,7 @@
 package ksr.model;
 
+import java.util.Objects;
+
 public class Entity {
 
     public int id;
@@ -41,6 +43,8 @@ public class Entity {
         this.height = parseInt(entityDB.height);
         this.earnings = parseInt(entityDB.earnings);
     }
+
+    //<editor-fold desc="parsers">
 
     private int parseInt(String s) {
         if (!s.equals("None")) {
@@ -137,6 +141,8 @@ public class Entity {
         }
     }
 
+    //</editor-fold>
+
     @Override
     public String toString() {
         return "Entity{" +
@@ -158,5 +164,34 @@ public class Entity {
                 ", height=" + height +
                 ", earnings=" + earnings +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity entity = (Entity) o;
+        return Objects.equals(id, entity.id) &&
+                Objects.equals(age, entity.age) &&
+                Objects.equals(numberOfKids, entity.numberOfKids) &&
+                Objects.equals(maxGrade, entity.maxGrade) &&
+                Objects.equals(completed, entity.completed) &&
+                Objects.equals(pregnancyCount, entity.pregnancyCount) &&
+                Objects.equals(marriageCount, entity.marriageCount) &&
+                Objects.equals(everWorked, entity.everWorked) &&
+                Objects.equals(weight, entity.weight) &&
+                Objects.equals(height, entity.height) &&
+                Objects.equals(earnings, entity.earnings) &&
+                Objects.equals(race, entity.race) &&
+                Objects.equals(maritalStatus, entity.maritalStatus) &&
+                Objects.equals(schoolType, entity.schoolType) &&
+                Objects.equals(degree, entity.degree) &&
+                Objects.equals(religion, entity.religion) &&
+                Objects.equals(workType, entity.workType);
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
