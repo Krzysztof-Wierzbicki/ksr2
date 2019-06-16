@@ -1,21 +1,38 @@
 package ksr.calculations;
 
+import ksr.model.Entity;
+
+import java.lang.reflect.Field;
 import java.util.function.Function;
 
-public class TriangleMembership implements Function<Double, Double> {
+public class TriangleMembership extends XMembership {
 
     private Double a, b, c;
+    private String fieldName;
 
-    public TriangleMembership(Double a, Double b, Double c) {
+    public TriangleMembership(Double a, Double b, Double c, String fieldName) {
         this.a = a;
         this.b = b;
         this.c = c;
+        this.fieldName = fieldName;
     }
 
-    public TriangleMembership(int a, int b, int c) {
+    public TriangleMembership(int a, int b, int c, String fieldName) {
         this.a = (double) a;
         this.b = (double) b;
         this.c = (double) c;
+        this.fieldName = fieldName;
+    }
+
+    public Double apply(Entity entity) throws NoSuchFieldException, IllegalAccessException {
+        Field field = entity.getClass().getField(fieldName);
+
+        if (field.getType().isAssignableFrom(Integer.TYPE)) {
+            return apply(field.getDouble(entity));
+        }
+
+        // TODO: finish
+        return 0.0;
     }
 
     @Override

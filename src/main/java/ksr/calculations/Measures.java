@@ -1,9 +1,22 @@
 package ksr.calculations;
 
+import ksr.model.Entity;
+import ksr.sets.LinguisticVariable;
+
+import java.util.List;
+
+// TODO: implement
 public class Measures {
 
     // T1
-    public static double degreeOfTruth() {
+    public static double degreeOfTruth(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) throws NoSuchFieldException, IllegalAccessException {
+        /*double up = 0;
+        double down = 0;
+
+        for (Entity entity : entities) {
+            up += Math.min(qualifier.getMembership(entity), summarizer.getMembership(entity));
+            down += qualifier.extractor.apply(entity);
+        }*/
         return 0;
     }
 

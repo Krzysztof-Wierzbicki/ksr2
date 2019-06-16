@@ -1,5 +1,7 @@
 package ksr.sets;
 
+import ksr.model.Entity;
+
 import java.util.*;
 
 public class FuzzySet<ElemType> {
@@ -16,6 +18,11 @@ public class FuzzySet<ElemType> {
 
     public FuzzySet(FuzzySet<ElemType> set){
         this.set = (HashMap<ElemType, Double>) set.set.clone();
+    }
+
+    public static double getMembership(Entity entity) {
+        // TODO: implement
+        return 0;
     }
 
     public static <T> FuzzySet<T> intersection(FuzzySet<T> set1, FuzzySet<T> set2){
