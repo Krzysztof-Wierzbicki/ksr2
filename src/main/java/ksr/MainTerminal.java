@@ -6,7 +6,6 @@ import ksr.model.Entity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -23,5 +22,7 @@ public class MainTerminal {
             set.add(entity.earnings);
         }
         System.out.println(set);
+
+        System.out.println(entities.get(0).race.getClass().getSimpleName());
     }
 }

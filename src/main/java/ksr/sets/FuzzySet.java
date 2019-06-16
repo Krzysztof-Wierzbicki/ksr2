@@ -1,5 +1,6 @@
 package ksr.sets;
 
+import ksr.calculations.XMembership;
 import ksr.model.Entity;
 
 import java.util.*;
@@ -7,6 +8,7 @@ import java.util.*;
 public class FuzzySet<ElemType> {
 
     private HashMap<ElemType, Double> set;
+    public static XMembership membership;
 
     public FuzzySet(){
         set = new HashMap<>();
@@ -20,9 +22,8 @@ public class FuzzySet<ElemType> {
         this.set = (HashMap<ElemType, Double>) set.set.clone();
     }
 
-    public static double getMembership(Entity entity) {
-        // TODO: implement
-        return 0;
+    public static double getMembership(Entity entity) throws NoSuchFieldException, IllegalAccessException {
+        return membership.apply(entity);
     }
 
     public static <T> FuzzySet<T> intersection(FuzzySet<T> set1, FuzzySet<T> set2){

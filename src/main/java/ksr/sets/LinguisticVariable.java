@@ -3,9 +3,6 @@ package ksr.sets;
 import ksr.calculations.XMembership;
 import ksr.model.Entity;
 
-import java.util.function.Function;
-
-// TODO: finish it
 public class LinguisticVariable {
 
     public String name;
@@ -23,7 +20,7 @@ public class LinguisticVariable {
         this.set = set;
     }
 
-    public double getMembership(Entity entity) {
+    public double getMembership(Entity entity) throws NoSuchFieldException, IllegalAccessException {
         return FuzzySet.getMembership(entity);
     }
 }
