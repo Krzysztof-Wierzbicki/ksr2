@@ -6,12 +6,26 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TriangleMembership extends XMembership {
+public class TriangularMembership extends XMembership {
 
     private Double a, b, c;
     private String fieldName;
 
-    public TriangleMembership(Double a, Double b, Double c, String fieldName) {
+    public TriangularMembership(Double a, Double b, Double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        parameters = new ArrayList<>(Arrays.asList(a, b, c));
+    }
+
+    public TriangularMembership(int a, int b, int c) {
+        this.a = (double) a;
+        this.b = (double) b;
+        this.c = (double) c;
+        parameters = new ArrayList<>(Arrays.asList((double) a, (double) b, (double) c));
+    }
+
+    public TriangularMembership(Double a, Double b, Double c, String fieldName) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -19,7 +33,7 @@ public class TriangleMembership extends XMembership {
         parameters = new ArrayList<>(Arrays.asList(a, b, c));
     }
 
-    public TriangleMembership(int a, int b, int c, String fieldName) {
+    public TriangularMembership(int a, int b, int c, String fieldName) {
         this.a = (double) a;
         this.b = (double) b;
         this.c = (double) c;

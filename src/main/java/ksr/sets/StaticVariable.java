@@ -1,12 +1,14 @@
 package ksr.sets;
 
 import ksr.calculations.TrapezoidMembership;
-import ksr.calculations.TriangleMembership;
+import ksr.calculations.TriangularMembership;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StaticVariable {
 
     // TODO: race, maritalStatus, schoolType, completed, degree, religion, everWorked, workType
-    // TODO: FuzzySets - adapt, fill, adjust
     //<editor-fold desc="race">
     //</editor-fold desc="race">
     //<editor-fold desc="age">
@@ -36,12 +38,12 @@ public class StaticVariable {
     //<editor-fold desc="numberOfKids">
     public static LinguisticVariable kidsFew = new LinguisticVariable(
             "few kids", "numberOfKids",
-            new TriangleMembership(0, 0, 3, "numberOfKids"),
+            new TriangularMembership(0, 0, 3, "numberOfKids"),
             new FuzzySet<>()
     );
     public static LinguisticVariable kidsMany = new LinguisticVariable(
             "many kids", "numberOfKids",
-            new TriangleMembership(2, 5, 5, "numberOfKids"),
+            new TriangularMembership(2, 5, 5, "numberOfKids"),
             new FuzzySet<>()
     );
     //</editor-fold desc="numberOfKids">
@@ -88,7 +90,7 @@ public class StaticVariable {
     //<editor-fold desc="marriageCount">
     public static LinguisticVariable marriagesFew = new LinguisticVariable(
             "few marriages", "marriageCount",
-            new TriangleMembership(0, 0, 3, "marriageCount"),
+            new TriangularMembership(0, 0, 3, "marriageCount"),
             new FuzzySet<>()
     );
     public static LinguisticVariable marriagesMany = new LinguisticVariable(
@@ -154,4 +156,15 @@ public class StaticVariable {
             new FuzzySet<>()
     );
     //</editor-fold desc="earnings">
+
+    public static ArrayList<LinguisticVariable> staticVariables = new ArrayList<>(Arrays.asList(
+            ageTeen, ageYoungAdult, ageAdult, ageOldAdult,
+            kidsFew, kidsMany,
+            gradesLow, gradesMedium, gradesHigh,
+            pregnanciesLow, pregnanciesMedium, pregnanciesHigh,
+            marriagesFew, marriagesMany,
+            weightLight, weightMedium, weightHeavy,
+            heightShort, heightMedium, heightTall,
+            earningsLow, earningsMedium, earningsHigh
+    ));
 }

@@ -11,6 +11,22 @@ public class TrapezoidMembership extends XMembership {
     private Double a, b, c, d;
     private String fieldName;
 
+    public TrapezoidMembership(Double a, Double b, Double c, Double d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        parameters = new ArrayList<>(Arrays.asList(a, b, c, d));
+    }
+
+    public TrapezoidMembership(int a, int b, int c, int d) {
+        this.a = (double) a;
+        this.b = (double) b;
+        this.c = (double) c;
+        this.d = (double) d;
+        parameters = new ArrayList<>(Arrays.asList((double) a, (double) b, (double) c, (double) d));
+    }
+
     public TrapezoidMembership(Double a, Double b, Double c, Double d, String fieldName) {
         this.a = a;
         this.b = b;
