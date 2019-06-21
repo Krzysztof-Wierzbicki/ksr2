@@ -1,5 +1,6 @@
 package ksr.sets;
 
+import ksr.calculations.DiscreteMembership;
 import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
 
@@ -10,6 +11,11 @@ public class StaticVariable {
 
     // TODO: race, maritalStatus, schoolType, completed, degree, religion, everWorked, workType
     //<editor-fold desc="race">
+    public static LinguisticVariable raceWhite = new LinguisticVariable(
+            "white", "race",
+            new DiscreteMembership(),
+            new FuzzySet<>()
+    );
     //</editor-fold desc="race">
     //<editor-fold desc="age">
     public static LinguisticVariable ageTeen = new LinguisticVariable(
