@@ -13,6 +13,11 @@ public class LinguisticVariable {
 
     public LinguisticVariable() {}
 
+    public LinguisticVariable(String name, FuzzySet<Entity> set) {
+        this.name = name;
+        this.set = set;
+    }
+
     public LinguisticVariable(String name, String extractName, XMembership extractor, FuzzySet<Entity> set) {
         this.name = name;
         this.extractName = extractName;

@@ -35,7 +35,7 @@ public class DiscreteMembership extends XMembership {
 
         // TODO: implement - IFs in Triangular and Trapezoid classes for enums might be unnecessary and their place is here (?)
 
-        return null;
+        return 0.;
     }
 
     @Override
