@@ -61,7 +61,7 @@ public class MainTerminal {
     }
 
     private static void generate() throws NoSuchFieldException, IllegalAccessException {
-        summaries = new ArrayList<SimpleEntry<Double, Pair<String, ArrayList<Double>>>>();
+        summaries = new ArrayList<>();
         for (LinguisticVariable quantifier : quantifiers) {
             String w = qualifier.name;
             String summary = quantifier.name + w + " are/have " + summarizer1.name;

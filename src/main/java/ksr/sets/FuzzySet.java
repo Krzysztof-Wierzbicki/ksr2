@@ -23,7 +23,7 @@ public class FuzzySet<ElemType> {
     }
 
     public static double getMembership(Entity entity) throws NoSuchFieldException, IllegalAccessException {
-        return extractor.apply(entity);
+        return extractor.apply(entity); // TODO: fix NPE
     }
 
     public static <T> FuzzySet<T> intersection(FuzzySet<T> set1, FuzzySet<T> set2){
