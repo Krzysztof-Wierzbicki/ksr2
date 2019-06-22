@@ -46,6 +46,6 @@ public class TrapezoidMembership extends XMembership {
 
     @Override
     public double cardinality() {
-        return 0.5 * ((d - a) + (c - b));
+        return 0.5 * (d - a + (c - b));
     }
 }

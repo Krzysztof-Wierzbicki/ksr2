@@ -1,5 +1,6 @@
 package ksr.sets;
 
+import ksr.calculations.ConstantMembership;
 import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
 
@@ -225,8 +226,19 @@ public class StaticVariable {
             )
     );
     //</editor-fold desc="earnings">
+    //<editor-fold desc="none">
+    public static LinguisticVariable none = new LinguisticVariable(
+            " - ",
+            x -> new ConstantMembership().getMembership(0.0),
+            new FuzzySet<>(
+                    new ConstantMembership(),
+                    x -> 0.0
+            )
+    );
+    //</editor-fold desc=" - ">
 
     public static ArrayList<LinguisticVariable> staticVariables = new ArrayList<>(Arrays.asList(
+            none,
             ageTeen, ageYoungAdult, ageAdult, ageOldAdult,
             kidsFew, kidsMany,
             gradesLow, gradesMedium, gradesHigh,

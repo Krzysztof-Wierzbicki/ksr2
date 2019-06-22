@@ -4,6 +4,8 @@ import javafx.util.Pair;
 import ksr.model.Entity;
 import ksr.sets.FuzzySet;
 import ksr.sets.LinguisticVariable;
+import ksr.sets.StaticQuantifiers;
+import ksr.sets.StaticVariable;
 
 import java.util.*;
 
@@ -143,7 +145,7 @@ public class Measures {
                 degreeOfSummarizerCardinality(quantificator, qualifier, summarizer, entities)
         ));
 
-        if (!qualifier.name.equals(" - ")) {
+        if (!qualifier.name.equals(StaticVariable.none.name)) {
             measureValues.add(degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities));
             measureValues.add(degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities));
             measureValues.add(lengthOfQualifier(quantificator, qualifier, summarizer, entities));
