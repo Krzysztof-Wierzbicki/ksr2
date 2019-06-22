@@ -42,6 +42,8 @@ public class MainTerminal {
         System.out.print("Pick [0]and / [1]or:\t");
         reportGenerator.setAndOr(andOrList.get(scanner.nextInt()));
 
+        System.out.println();
+
         reportGenerator.generate();
         reportGenerator.save();
 
