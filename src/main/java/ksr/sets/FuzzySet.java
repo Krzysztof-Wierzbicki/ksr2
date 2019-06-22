@@ -140,4 +140,6 @@ public class FuzzySet<ElemType> {
     public ArrayList<FuzzySet> getAllFuzzySets() {
         return new ArrayList<>(Arrays.asList(this));
     }
+
+    public void setAllFuzzySets(List<FuzzySet> sets) {}
 }

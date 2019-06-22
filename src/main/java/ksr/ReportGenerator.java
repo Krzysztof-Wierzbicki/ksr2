@@ -3,6 +3,7 @@ package ksr;
 import javafx.util.Pair;
 import ksr.calculations.Measures;
 import ksr.model.Entity;
+import ksr.sets.FuzzySet;
 import ksr.sets.LinguisticVariable;
 
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ReportGenerator {
 
@@ -28,6 +30,19 @@ public class ReportGenerator {
             String w = !qualifier.name.equals(" - ") ? " of females being/having " + qualifier.name : "";
             String summary = "> " + quantifier.name + w + " are/have " + summarizer1.name + "\n";
             SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, summarizer1, summary);
+            summaries.add(pair);
+        }
+        summaries.sort((x, y) -> y.getKey().compareTo(x.getKey()));
+        report = generateReport();
+    }
+
+    public void generateComplex() throws NoSuchFieldException, IllegalAccessException {
+        summaries = new ArrayList<>();
+        andOr.set.setAllFuzzySets(Arrays.asList(summarizer1.set, summarizer2.set));
+        for (LinguisticVariable quantifier : quantifiers) {
+            String summary = "> " + quantifier.name + " of females being/having " + qualifier.name + " are/have "
+                    + summarizer1.name + " " + andOr.name + " " + summarizer2.name + "\n";
+            SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, andOr, summary);
             summaries.add(pair);
         }
         summaries.sort((x, y) -> y.getKey().compareTo(x.getKey()));
