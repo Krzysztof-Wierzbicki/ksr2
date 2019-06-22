@@ -58,13 +58,15 @@ public class MainTerminal {
         generate();
 
         save();
+
+        System.out.print(report);
     }
 
     private static void generate() throws NoSuchFieldException, IllegalAccessException {
         summaries = new ArrayList<>();
         for (LinguisticVariable quantifier : quantifiers) {
-            String w = qualifier.name;
-            String summary = quantifier.name + w + " are/have " + summarizer1.name;
+            String w = !qualifier.name.equals(" - ") ? "of females being/having " + qualifier.name : "";
+            String summary = quantifier.name + w + " are/have " + summarizer1.name + "\n\n";
             var pair = pair(quantifier, summarizer1, summary);
             summaries.add(pair);
         }
