@@ -10,7 +10,7 @@ public class Or extends FuzzySet<Entity> {
     public static FuzzySet<Entity> set1;
     public static FuzzySet<Entity> set2;
 
-    public static double getMembership(Entity entity) {
+    public double getMembership(Entity entity) {
         return Math.max(set1.getMembership(entity), set2.getMembership(entity));
     }
 

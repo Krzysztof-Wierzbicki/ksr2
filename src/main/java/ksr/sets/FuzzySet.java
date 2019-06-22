@@ -9,8 +9,8 @@ import java.util.function.Function;
 public class FuzzySet<ElemType> {
 
     private HashMap<ElemType, Double> set;
-    public static XMembership xmembership;
-    public static Function<Entity, Double> extractor;
+    public XMembership xmembership;
+    public Function<Entity, Double> extractor;
 
     public FuzzySet(){
         set = new HashMap<>();
@@ -24,7 +24,12 @@ public class FuzzySet<ElemType> {
         this.set = (HashMap<ElemType, Double>) set.set.clone();
     }
 
-    public static double getMembership(Entity entity) {
+    public FuzzySet(XMembership xmembership, Function<Entity, Double> extractor) {
+        this.xmembership = xmembership;
+        this.extractor = extractor;
+    }
+
+    public double getMembership(Entity entity) {
         return xmembership.getMembership(extractor.apply(entity));
     }
 

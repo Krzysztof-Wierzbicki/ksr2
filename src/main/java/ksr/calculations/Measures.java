@@ -20,10 +20,10 @@ public class Measures {
         }
 
         if (quantificator.absolute) {
-            return quantificator.extractor.getMembership(numerator);
+            return quantificator.xmembership.getMembership(numerator);
         }
         else {
-            return quantificator.extractor.getMembership(numerator / denominator);
+            return quantificator.xmembership.getMembership(numerator / denominator);
         }
     }
 
@@ -81,7 +81,7 @@ public class Measures {
 
     // T6
     public static double degreeOfQuantifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = quantificator.extractor.parameters.get(quantificator.extractor.parameters.size() - 1) - quantificator.extractor.parameters.get(0);
+        double ret = quantificator.xmembership.parameters.get(quantificator.xmembership.parameters.size() - 1) - quantificator.xmembership.parameters.get(0);
 
         if (quantificator.absolute) {
             ret /= entities.size();
@@ -92,7 +92,7 @@ public class Measures {
 
     // T7
     public static double degreeOfQuantifierCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = quantificator.extractor.cardinality();
+        double ret = quantificator.xmembership.cardinality();
 
         if (quantificator.absolute) {
             ret /= entities.size();

@@ -1,14 +1,10 @@
 package ksr.calculations;
 
-import ksr.model.Entity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class DiscreteMembership extends XMembership {
-
-    private String fieldName;
 
     public DiscreteMembership(List<Double> parameters) {
         this.parameters = (ArrayList<Double>) parameters;
@@ -16,16 +12,6 @@ public class DiscreteMembership extends XMembership {
 
     public DiscreteMembership(Double... parameters) {
         this.parameters = new ArrayList<>(Arrays.asList(parameters));
-    }
-
-    public DiscreteMembership(String fieldName, List<Double> parameters) {
-        this.parameters = (ArrayList<Double>) parameters;
-        this.fieldName = fieldName;
-    }
-
-    public DiscreteMembership(String fieldName, Double... parameters) {
-        this.parameters = new ArrayList<>(Arrays.asList(parameters));
-        this.fieldName = fieldName;
     }
 
     @Override
