@@ -78,8 +78,8 @@ public class MainTerminal {
         printWriter.close();
     }
 
-    private static SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair(LinguisticVariable qualifier, LinguisticVariable summarizer, String summary) throws NoSuchFieldException, IllegalAccessException {
-        var temp = Measures.weightedMeasure(qualifier, qualifier, summarizer, entities);
+    private static SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair(LinguisticVariable quantifier, LinguisticVariable summarizer, String summary) throws NoSuchFieldException, IllegalAccessException {
+        Pair<Double, ArrayList<Double>> temp = Measures.weightedMeasure(quantifier, qualifier, summarizer, entities);
         return new SimpleEntry<>(temp.getKey(), new Pair<>(summary, temp.getValue()));
     }
 
