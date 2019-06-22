@@ -22,8 +22,8 @@ public class MainTerminal {
         reportGenerator.setQuantifiers(StaticQuantifiers.staticQuantifiers);
 
         ArrayList<LinguisticVariable> andOrList = new ArrayList<>(Arrays.asList(
-                new LinguisticVariable("or", new Or()),
-                new LinguisticVariable("and", new And())
+                new LinguisticVariable("and", new And()),
+                new LinguisticVariable("of", new Or())
         ));
 
         for (int i = 0; i < StaticVariable.staticVariables.size(); i++) {
@@ -42,7 +42,11 @@ public class MainTerminal {
         System.out.print("Pick [0]and / [1]or:\t");
         reportGenerator.setAndOr(andOrList.get(scanner.nextInt()));
 
-        reportGenerator.generate();
+        System.out.println();
+
+        reportGenerator.generateComplex();
         reportGenerator.save();
+
+        System.out.print(reportGenerator.getReport());
     }
 }

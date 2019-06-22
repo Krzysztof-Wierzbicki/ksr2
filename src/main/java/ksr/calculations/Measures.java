@@ -11,8 +11,8 @@ public class Measures {
 
     // T1
     public static double degreeOfTruth(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) throws NoSuchFieldException, IllegalAccessException {
-        double numerator = 0;
-        double denominator = 0;
+        double numerator = 0.0;
+        double denominator = 0.0;
 
         for (Entity entity : entities) {
             numerator += Math.min(qualifier.getMembership(entity), summarizer.getMembership(entity));
@@ -29,30 +29,30 @@ public class Measures {
 
     // T2
     public static double degreeOfImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = 1;
+        double ret = 1.0;
         ArrayList<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
             ret *= set.degreeOfFuzziness(entities);
         }
 
-        ret = Math.pow(ret, 1 / sets.size());
-        return 1 - ret;
+        ret = Math.pow(ret, 1.0 / sets.size());
+        return 1.0 - ret;
     }
 
     // T3
     public static double degreeOfCovering(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) throws NoSuchFieldException, IllegalAccessException {
-        double numerator = 0;
-        double denominator = 0;
+        double numerator = 0.0;
+        double denominator = 0.0;
 
         for (Entity entity : entities) {
             double qualifierMembership = qualifier.getMembership(entity);
             double summarizerMembership = summarizer.getMembership(entity);
 
             if (qualifierMembership > 0) {
-                denominator++;
+                denominator += 1.0;
                 if (summarizerMembership > 0) {
-                    numerator++;
+                    numerator += 1.0;
                 }
             }
         }
@@ -62,13 +62,13 @@ public class Measures {
 
     // T4
     public static double degreeOfAppropriateness(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) throws NoSuchFieldException, IllegalAccessException {
-        double ret = 1;
+        double ret = 1.0;
         ArrayList<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         double t3 = degreeOfCovering(quantificator, qualifier, summarizer, entities);
 
         for (FuzzySet set : sets) {
-            ret *= ((double) set.support(entities).size() / entities.size()) - t3;
+            ret *= ((double) set.support(entities).size() / (double) entities.size()) - t3;
         }
 
         return Math.abs(ret);
@@ -76,7 +76,7 @@ public class Measures {
 
     // T5
     public static double lengthOfSummary(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 2.0 * Math.pow(0.5, summarizer.set.getAllFuzzySets().size());
+        return 2.0 * Math.pow(0.5, (double) summarizer.set.getAllFuzzySets().size());
     }
 
     // T6
@@ -84,10 +84,10 @@ public class Measures {
         double ret = quantificator.xmembership.parameters.get(quantificator.xmembership.parameters.size() - 1) - quantificator.xmembership.parameters.get(0);
 
         if (quantificator.absolute) {
-            ret /= entities.size();
+            ret /= (double) entities.size();
         }
 
-        return 1 - ret;
+        return 1.0 - ret;
     }
 
     // T7
@@ -95,38 +95,38 @@ public class Measures {
         double ret = quantificator.xmembership.cardinality();
 
         if (quantificator.absolute) {
-            ret /= entities.size();
+            ret /= (double) entities.size();
         }
 
-        return 1 - ret;
+        return 1.0 - ret;
     }
 
     // T8
     public static double degreeOfSummarizerCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = 1;
+        double ret = 1.0;
         List<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
-            ret *= set.cardinality() / entities.size();
+            ret *= set.cardinality() / (double) entities.size();
         }
 
-        ret = Math.pow(ret, 1.0 / sets.size());
-        return 1 - ret;
+        ret = Math.pow(ret, 1.0 / (double) sets.size());
+        return 1.0 - ret;
     }
 
     // T9
     public static double degreeOfQualifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 1 - qualifier.set.degreeOfFuzziness(entities);
+        return 1.0 - qualifier.set.degreeOfFuzziness(entities);
     }
 
     // T10
     public static double degreeOfQualifierCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 1 - qualifier.set.cardinality() / entities.size();
+        return 1.0 - qualifier.set.cardinality() / (double) entities.size();
     }
 
     // T11
     public static double lengthOfQualifier(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 2.0 * Math.pow(0.5, qualifier.set.getAllFuzzySets().size());
+        return 2.0 * Math.pow(0.5, (double) qualifier.set.getAllFuzzySets().size());
     }
 
     // custom, weighted measure

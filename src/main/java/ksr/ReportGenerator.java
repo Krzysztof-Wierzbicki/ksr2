@@ -3,63 +3,84 @@ package ksr;
 import javafx.util.Pair;
 import ksr.calculations.Measures;
 import ksr.model.Entity;
+import ksr.sets.FuzzySet;
 import ksr.sets.LinguisticVariable;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ReportGenerator {
 
     private LinguisticVariable qualifier;
-
     private LinguisticVariable summarizer1;
     private LinguisticVariable summarizer2;
     private LinguisticVariable andOr;
     private ArrayList<LinguisticVariable> quantifiers;
     private ArrayList<Entity> entities;
-    private ArrayList<AbstractMap.SimpleEntry<Double, Pair<String, ArrayList<Double>>>> summaries;
+    private ArrayList<SimpleEntry<Double, Pair<String, ArrayList<Double>>>> summaries;
     private String report;
 
-    void generate() throws NoSuchFieldException, IllegalAccessException {
+    public void generate() throws NoSuchFieldException, IllegalAccessException {
         summaries = new ArrayList<>();
         for (LinguisticVariable quantifier : quantifiers) {
-            String w = qualifier.name;
-            String summary = quantifier.name + w + " are/have " + summarizer1.name;
-            AbstractMap.SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, summarizer1, summary);
+            String w = !qualifier.name.equals(" - ") ? " of females being/having " + qualifier.name : "";
+            String summary = "> " + quantifier.name + w + " are/have " + summarizer1.name + "\n";
+            SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, summarizer1, summary);
             summaries.add(pair);
         }
         summaries.sort((x, y) -> y.getKey().compareTo(x.getKey()));
         report = generateReport();
     }
 
-    void save() throws FileNotFoundException {
+    public void generateComplex() throws NoSuchFieldException, IllegalAccessException {
+        summaries = new ArrayList<>();
+        andOr.set.setAllFuzzySets(Arrays.asList(summarizer1.set, summarizer2.set));
+        for (LinguisticVariable quantifier : quantifiers) {
+            String summary = "> " + quantifier.name + " of females being/having " + qualifier.name + " are/have "
+                    + summarizer1.name + " " + andOr.name + " " + summarizer2.name + "\n";
+            SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, andOr, summary);
+            summaries.add(pair);
+        }
+        summaries.sort((x, y) -> y.getKey().compareTo(x.getKey()));
+        report = generateReport();
+    }
+
+    public void save() throws FileNotFoundException {
         PrintWriter printWriter = new PrintWriter("report.txt");
         printWriter.print(report);
         printWriter.close();
     }
 
-    AbstractMap.SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair(LinguisticVariable quantifier, LinguisticVariable summarizer, String summary) throws NoSuchFieldException, IllegalAccessException {
+    private SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair(LinguisticVariable quantifier, LinguisticVariable summarizer, String summary) throws NoSuchFieldException, IllegalAccessException {
         Pair<Double, ArrayList<Double>> temp = Measures.weightedMeasure(quantifier, qualifier, summarizer, entities);
-        return new AbstractMap.SimpleEntry<>(temp.getKey(), new Pair<>(summary, temp.getValue()));
+        return new SimpleEntry<>(temp.getKey(), new Pair<>(summary, temp.getValue()));
     }
 
-    String generateReport() {
+    private String generateReport() {
         StringBuilder ret = new StringBuilder();
 
-        for (AbstractMap.SimpleEntry<Double, Pair<String, ArrayList<Double>>> summary : summaries) {
+        for (SimpleEntry<Double, Pair<String, ArrayList<Double>>> summary : summaries) {
             int i = 1;
-            ret.append(summary.getValue().getKey()).append(" [").append(Math.round(100 * summary.getKey()) / 100).append("]\n");
+            ret.append(summary.getValue().getKey()).append("  [").append((double) Math.round(1000 * summary.getKey()) / 1000.0).append("] \t");
             ret.append("[");
             for (Double x : summary.getValue().getValue()) {
-                ret.append("T").append(i++).append("=").append(Math.round(100 * x) / 100).append("; ");
+                ret.append("T").append(i++).append("=").append((double) Math.round(1000 * x) / 1000.0).append(", ");
             }
             ret = new StringBuilder(ret.substring(0, ret.length() - 2));
-            ret.append("]\n");
+            ret.append("]\n\n");
         }
 
+        ret = new StringBuilder(ret.substring(0, ret.length() - 1));
         return ret.toString();
+    }
+
+    //<editor-fold desc="get/setters">
+    public String getReport() {
+        return report;
     }
 
     public LinguisticVariable getQualifier() {
@@ -109,4 +130,5 @@ public class ReportGenerator {
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
+    //</editor-fold desc="get/setters">
 }
