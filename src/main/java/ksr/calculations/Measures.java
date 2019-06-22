@@ -16,7 +16,7 @@ public class Measures {
 
         for (Entity entity : entities) {
             numerator += Math.min(qualifier.getMembership(entity), summarizer.getMembership(entity));
-            denominator += qualifier.getMembership(entity);
+            denominator += qualifier.extractor.apply(entity);
         }
 
         if (quantificator.absolute) {
@@ -140,28 +140,39 @@ public class Measures {
                 lengthOfSummary(quantificator, qualifier, summarizer, entities),
                 degreeOfQuantifierImprecision(quantificator, qualifier, summarizer, entities),
                 degreeOfQuantifierCardinality(quantificator, qualifier, summarizer, entities),
-                degreeOfSummarizerCardinality(quantificator, qualifier, summarizer, entities),
-                degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities),
-                degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities),
-                lengthOfQualifier(quantificator, qualifier, summarizer, entities)
+                degreeOfSummarizerCardinality(quantificator, qualifier, summarizer, entities)
         ));
 
-        measureValues.add(degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities));
-        measureValues.add(degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities));
-        measureValues.add(lengthOfQualifier(quantificator, qualifier, summarizer, entities));
-        weightedValues = new ArrayList<>(Arrays.asList(
-                measureValues.get(0) * 0.7,
-                measureValues.get(1) * 0.03,
-                measureValues.get(2) * 0.03,
-                measureValues.get(3) * 0.03,
-                measureValues.get(4) * 0.03,
-                measureValues.get(5) * 0.03,
-                measureValues.get(6) * 0.03,
-                measureValues.get(7) * 0.03,
-                measureValues.get(8) * 0.03,
-                measureValues.get(9) * 0.03,
-                measureValues.get(10) * 0.03
-        ));
+        if (!qualifier.name.equals(" - ")) {
+            measureValues.add(degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities));
+            measureValues.add(degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities));
+            measureValues.add(lengthOfQualifier(quantificator, qualifier, summarizer, entities));
+            weightedValues = new ArrayList<>(Arrays.asList(
+                    measureValues.get(0) * 0.7,
+                    measureValues.get(1) * 0.03,
+                    measureValues.get(2) * 0.03,
+                    measureValues.get(3) * 0.03,
+                    measureValues.get(4) * 0.03,
+                    measureValues.get(5) * 0.03,
+                    measureValues.get(6) * 0.03,
+                    measureValues.get(7) * 0.03,
+                    measureValues.get(8) * 0.03,
+                    measureValues.get(9) * 0.03,
+                    measureValues.get(10) * 0.03
+            ));
+        }
+        else {
+            weightedValues = new ArrayList<>(Arrays.asList(
+                    measureValues.get(0) * 0.755,
+                    measureValues.get(1) * 0.035,
+                    measureValues.get(2) * 0.035,
+                    measureValues.get(3) * 0.035,
+                    measureValues.get(4) * 0.035,
+                    measureValues.get(5) * 0.035,
+                    measureValues.get(6) * 0.035,
+                    measureValues.get(7) * 0.035
+            ));
+        }
 
         double sum = weightedValues.stream().mapToDouble(n -> n).sum();
         return new Pair<>(sum, measureValues);

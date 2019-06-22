@@ -129,10 +129,6 @@ public class FuzzySet<ElemType> {
         return elements;
     }
 
-    public int size() {
-        return set.size();
-    }
-
     public double degreeOfFuzziness(List<Entity> entities, XMembership extractor) {
         return (double) support(entities, extractor).size() / entities.size();
     }

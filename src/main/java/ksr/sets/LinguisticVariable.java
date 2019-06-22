@@ -8,7 +8,6 @@ import java.util.function.Function;
 public class LinguisticVariable {
 
     public String name;
-    public String extractName;
     public XMembership xmembership;
     public Function<Entity, Double> extractor;
     public FuzzySet<Entity> set;
@@ -19,9 +18,8 @@ public class LinguisticVariable {
         this.set = set;
     }
 
-    public LinguisticVariable(String name, String extractName, Function<Entity, Double> extractor, FuzzySet<Entity> set) {
+    public LinguisticVariable(String name, Function<Entity, Double> extractor, FuzzySet<Entity> set) {
         this.name = name;
-        this.extractName = extractName;
         this.extractor = extractor;
         this.set = set;
     }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class And extends FuzzySet<Entity> {
 
-    public static FuzzySet<Entity> set1;
-    public static FuzzySet<Entity> set2;
+    public FuzzySet<Entity> set1;
+    public FuzzySet<Entity> set2;
 
     public double getMembership(Entity entity) {
         return Math.min(set1.getMembership(entity), set2.getMembership(entity));
