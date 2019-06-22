@@ -104,7 +104,7 @@ public class Measures {
     // T8
     public static double degreeOfSummarizerCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
         double ret = 1.0;
-        ArrayList<FuzzySet> sets = summarizer.set.getAllFuzzySets();
+        List<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
             ret *= set.cardinality() / (double) entities.size();
