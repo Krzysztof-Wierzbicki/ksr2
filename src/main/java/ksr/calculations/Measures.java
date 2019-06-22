@@ -16,14 +16,14 @@ public class Measures {
 
         for (Entity entity : entities) {
             numerator += Math.min(qualifier.getMembership(entity), summarizer.getMembership(entity));
-            denominator += qualifier.extractor.apply(entity);
+            denominator += qualifier.getMembership(entity);
         }
 
         if (quantificator.absolute) {
-            return quantificator.extractor.apply(numerator);
+            return quantificator.extractor.getMembership(numerator);
         }
         else {
-            return quantificator.extractor.apply(numerator / denominator);
+            return quantificator.extractor.getMembership(numerator / denominator);
         }
     }
 
@@ -33,7 +33,7 @@ public class Measures {
         ArrayList<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
-            ret *= set.getDegreeOfFuzziness(entities);
+            ret *= set.degreeOfFuzziness(entities);
         }
 
         ret = Math.pow(ret, 1 / sets.size());
@@ -116,7 +116,7 @@ public class Measures {
 
     // T9
     public static double degreeOfQualifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 1 - qualifier.set.getDegreeOfFuzziness(entities);
+        return 1 - qualifier.set.degreeOfFuzziness(entities);
     }
 
     // T10

@@ -2,7 +2,6 @@ package ksr.calculations;
 
 import ksr.model.Entity;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,21 +29,17 @@ public class DiscreteMembership extends XMembership {
     }
 
     @Override
-    public Double apply(Entity entity) throws NoSuchFieldException, IllegalAccessException {
-        Field field = entity.getClass().getField(fieldName);
+    public ArrayList<XMembership> getAll() {
+        return new ArrayList<>(Arrays.asList(this));
+    }
 
-        // TODO: implement - IFs in Triangular and Trapezoid classes for enums might be unnecessary and their place is here (?)
-
-        return 0.;
+    @Override
+    public Double getMembership(double x) {
+        return parameters.get((int) x);
     }
 
     @Override
     public double cardinality() {
         return parameters.stream().mapToDouble(a -> a).sum();
-    }
-
-    @Override
-    public Double apply(Double x) {
-        return parameters.get(x.intValue());
     }
 }
