@@ -1,10 +1,14 @@
 package ksr.sets;
 
+import ksr.calculations.XMembership;
+import ksr.model.Entity;
+
 import java.util.*;
 
 public class FuzzySet<ElemType> {
 
     private HashMap<ElemType, Double> set;
+    public static XMembership extractor;
 
     public FuzzySet(){
         set = new HashMap<>();
@@ -16,6 +20,10 @@ public class FuzzySet<ElemType> {
 
     public FuzzySet(FuzzySet<ElemType> set){
         this.set = (HashMap<ElemType, Double>) set.set.clone();
+    }
+
+    public static double getMembership(Entity entity) throws NoSuchFieldException, IllegalAccessException {
+        return extractor.apply(entity);
     }
 
     public static <T> FuzzySet<T> intersection(FuzzySet<T> set1, FuzzySet<T> set2){
@@ -44,6 +52,30 @@ public class FuzzySet<ElemType> {
 
     public Set<ElemType> support() {
         return set.keySet();
+    }
+
+    public ArrayList<Entity> support(List<Entity> entities, XMembership extractor) {
+        ArrayList<Entity> result = new ArrayList<>();
+
+        entities.forEach((entity) -> {
+            try {
+                if (extractor.apply(entity) > 0) {
+                    result.add(entity);
+                }
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return result;
+    }
+
+    public ArrayList<Entity> support(List<Entity> entities) {
+        return support(entities, extractor);
+    }
+
+    public double cardinality() {
+        return extractor.cardinality();
     }
 
     public Set<Map.Entry<ElemType, Double>> entrySet(){
@@ -83,10 +115,30 @@ public class FuzzySet<ElemType> {
         return set.values();
     }
 
+    public Set<ElemType> keys() {
+        return set.keySet();
+    }
+
     private static <T> Set<T> commonElementsSet(FuzzySet<T> set1, FuzzySet<T> set2){
         Set<T> elements = new HashSet<>();
         elements.addAll(set1.set.keySet());
         elements.addAll(set2.set.keySet());
         return elements;
+    }
+
+    public int size() {
+        return set.size();
+    }
+
+    public double getDegreeOfFuzziness(List<Entity> entities, XMembership extractor) {
+        return (double) support(entities, extractor).size() / entities.size();
+    }
+
+    public double getDegreeOfFuzziness(List<Entity> entities) {
+        return getDegreeOfFuzziness(entities, extractor);
+    }
+
+    public ArrayList<FuzzySet> getAllFuzzySets() {
+        return new ArrayList<>(Arrays.asList(this));
     }
 }

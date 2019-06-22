@@ -141,7 +141,7 @@ public class Entity {
         }
     }
 
-    //</editor-fold>
+    //</editor-fold desc="parsers">
 
     @Override
     public String toString() {
