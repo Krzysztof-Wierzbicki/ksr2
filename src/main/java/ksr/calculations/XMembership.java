@@ -1,14 +1,11 @@
 package ksr.calculations;
 
-import ksr.model.Entity;
-
 import java.util.ArrayList;
-import java.util.function.Function;
 
-public abstract class XMembership implements Function<Double, Double> {
+public abstract class XMembership {
 
     public ArrayList<Double> parameters;
-
-    public abstract Double apply(Entity entity) throws NoSuchFieldException, IllegalAccessException;
+    public abstract ArrayList<XMembership> getAll();
+    public abstract Double getMembership(double x);
     public abstract double cardinality();
 }

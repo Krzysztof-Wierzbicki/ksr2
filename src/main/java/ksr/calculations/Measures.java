@@ -20,10 +20,10 @@ public class Measures {
         }
 
         if (quantificator.absolute) {
-            return quantificator.extractor.apply(numerator);
+            return quantificator.xmembership.getMembership(numerator);
         }
         else {
-            return quantificator.extractor.apply(numerator / denominator);
+            return quantificator.xmembership.getMembership(numerator / denominator);
         }
     }
 
@@ -33,7 +33,7 @@ public class Measures {
         ArrayList<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
-            ret *= set.getDegreeOfFuzziness(entities);
+            ret *= set.degreeOfFuzziness(entities);
         }
 
         ret = Math.pow(ret, 1 / sets.size());
@@ -81,7 +81,7 @@ public class Measures {
 
     // T6
     public static double degreeOfQuantifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = quantificator.extractor.parameters.get(quantificator.extractor.parameters.size() - 1) - quantificator.extractor.parameters.get(0);
+        double ret = quantificator.xmembership.parameters.get(quantificator.xmembership.parameters.size() - 1) - quantificator.xmembership.parameters.get(0);
 
         if (quantificator.absolute) {
             ret /= entities.size();
@@ -92,7 +92,7 @@ public class Measures {
 
     // T7
     public static double degreeOfQuantifierCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        double ret = quantificator.extractor.cardinality();
+        double ret = quantificator.xmembership.cardinality();
 
         if (quantificator.absolute) {
             ret /= entities.size();
@@ -116,7 +116,7 @@ public class Measures {
 
     // T9
     public static double degreeOfQualifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 1 - qualifier.set.getDegreeOfFuzziness(entities);
+        return 1 - qualifier.set.degreeOfFuzziness(entities);
     }
 
     // T10
@@ -140,28 +140,39 @@ public class Measures {
                 lengthOfSummary(quantificator, qualifier, summarizer, entities),
                 degreeOfQuantifierImprecision(quantificator, qualifier, summarizer, entities),
                 degreeOfQuantifierCardinality(quantificator, qualifier, summarizer, entities),
-                degreeOfSummarizerCardinality(quantificator, qualifier, summarizer, entities),
-                degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities),
-                degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities),
-                lengthOfQualifier(quantificator, qualifier, summarizer, entities)
+                degreeOfSummarizerCardinality(quantificator, qualifier, summarizer, entities)
         ));
 
-        measureValues.add(degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities));
-        measureValues.add(degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities));
-        measureValues.add(lengthOfQualifier(quantificator, qualifier, summarizer, entities));
-        weightedValues = new ArrayList<>(Arrays.asList(
-                measureValues.get(0) * 0.7,
-                measureValues.get(1) * 0.03,
-                measureValues.get(2) * 0.03,
-                measureValues.get(3) * 0.03,
-                measureValues.get(4) * 0.03,
-                measureValues.get(5) * 0.03,
-                measureValues.get(6) * 0.03,
-                measureValues.get(7) * 0.03,
-                measureValues.get(8) * 0.03,
-                measureValues.get(9) * 0.03,
-                measureValues.get(10) * 0.03
-        ));
+        if (!qualifier.name.equals(" - ")) {
+            measureValues.add(degreeOfQualifierImprecision(quantificator, qualifier, summarizer, entities));
+            measureValues.add(degreeOfQualifierCardinality(quantificator, qualifier, summarizer, entities));
+            measureValues.add(lengthOfQualifier(quantificator, qualifier, summarizer, entities));
+            weightedValues = new ArrayList<>(Arrays.asList(
+                    measureValues.get(0) * 0.7,
+                    measureValues.get(1) * 0.03,
+                    measureValues.get(2) * 0.03,
+                    measureValues.get(3) * 0.03,
+                    measureValues.get(4) * 0.03,
+                    measureValues.get(5) * 0.03,
+                    measureValues.get(6) * 0.03,
+                    measureValues.get(7) * 0.03,
+                    measureValues.get(8) * 0.03,
+                    measureValues.get(9) * 0.03,
+                    measureValues.get(10) * 0.03
+            ));
+        }
+        else {
+            weightedValues = new ArrayList<>(Arrays.asList(
+                    measureValues.get(0) * 0.755,
+                    measureValues.get(1) * 0.035,
+                    measureValues.get(2) * 0.035,
+                    measureValues.get(3) * 0.035,
+                    measureValues.get(4) * 0.035,
+                    measureValues.get(5) * 0.035,
+                    measureValues.get(6) * 0.035,
+                    measureValues.get(7) * 0.035
+            ));
+        }
 
         double sum = weightedValues.stream().mapToDouble(n -> n).sum();
         return new Pair<>(sum, measureValues);

@@ -7,10 +7,10 @@ import java.util.List;
 
 public class And extends FuzzySet<Entity> {
 
-    public static FuzzySet<Entity> set1;
-    public static FuzzySet<Entity> set2;
+    public FuzzySet<Entity> set1;
+    public FuzzySet<Entity> set2;
 
-    public static double getMembership(Entity entity) throws NoSuchFieldException, IllegalAccessException {
+    public double getMembership(Entity entity) {
         return Math.min(set1.getMembership(entity), set2.getMembership(entity));
     }
 
@@ -20,8 +20,8 @@ public class And extends FuzzySet<Entity> {
         return new ArrayList<>(intersection.keys());
     }
 
-    public double getDegreeOfFuzziness(List<Entity> entities) {
-        return set1.getDegreeOfFuzziness(entities) * set2.getDegreeOfFuzziness(entities);
+    public double degreeOfFuzziness(List<Entity> entities) {
+        return set1.degreeOfFuzziness(entities) * set2.degreeOfFuzziness(entities);
     }
 
     public ArrayList<FuzzySet> getAllFuzzySets() {
