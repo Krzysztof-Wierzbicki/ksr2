@@ -30,13 +30,13 @@ public class TrapezoidMembership extends XMembership {
 
     @Override
     public Double getMembership(double x) {
-        if (a <= x && x <= b) {
-            return (x - a) / (b - c);
+        if (a <= x && x < b) {
+            return (x - a) / (b - a);
         }
         else if (b <= x && x <= c) {
             return 1.0;
         }
-        else if (c <= x && x <= d) {
+        else if (c < x && x <= d) {
             return (d - x) / (d - c);
         }
         else {

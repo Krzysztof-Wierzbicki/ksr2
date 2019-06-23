@@ -28,10 +28,13 @@ public class TriangularMembership extends XMembership {
 
     @Override
     public Double getMembership(double x) {
-        if (a <= x && x <= b) {
+        if (a <= x && x < b) {
             return (x - a) / (b - a);
         }
-        else if (b <= x && x <= c) {
+        else if (x == b) {
+            return 1.0;
+        }
+        else if (b < x && x <= c) {
             return (c - x) / (c - b);
         }
         else {

@@ -4,10 +4,11 @@ import javafx.util.Pair;
 import ksr.model.Entity;
 import ksr.sets.FuzzySet;
 import ksr.sets.LinguisticVariable;
-import ksr.sets.StaticQuantifiers;
 import ksr.sets.StaticVariable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Measures {
 
@@ -81,35 +82,38 @@ public class Measures {
         return 2.0 * Math.pow(0.5, (double) summarizer.set.getAllFuzzySets().size());
     }
 
-    // T6
+    // T6 /
     public static double degreeOfQuantifierImprecision(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
         double ret = quantificator.xmembership.parameters.get(quantificator.xmembership.parameters.size() - 1) - quantificator.xmembership.parameters.get(0);
 
         if (quantificator.absolute) {
+            ret %= (double) entities.size();
             ret /= (double) entities.size();
         }
 
         return 1.0 - ret;
     }
 
-    // T7
+    // T7 /
     public static double degreeOfQuantifierCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
         double ret = quantificator.xmembership.cardinality();
 
         if (quantificator.absolute) {
+            ret %= (double) entities.size();
             ret /= (double) entities.size();
         }
 
         return 1.0 - ret;
     }
 
-    // T8
+    // T8 /
     public static double degreeOfSummarizerCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
         double ret = 1.0;
         List<FuzzySet> sets = summarizer.set.getAllFuzzySets();
 
         for (FuzzySet set : sets) {
-            ret *= set.cardinality() / (double) entities.size();
+            double x = set.cardinality() % (double) entities.size();
+            ret *= x / (double) entities.size();
         }
 
         ret = Math.pow(ret, 1.0 / (double) sets.size());
@@ -121,9 +125,10 @@ public class Measures {
         return 1.0 - qualifier.set.degreeOfFuzziness(entities);
     }
 
-    // T10
+    // T10 /
     public static double degreeOfQualifierCardinality(LinguisticVariable quantificator, LinguisticVariable qualifier, LinguisticVariable summarizer, List<Entity> entities) {
-        return 1.0 - qualifier.set.cardinality() / (double) entities.size();
+        double x = qualifier.set.cardinality() % (double) entities.size();
+        return 1.0 - x / (double) entities.size();
     }
 
     // T11
