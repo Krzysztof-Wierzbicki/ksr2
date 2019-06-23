@@ -1,8 +1,80 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="ksr.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ksr.Controller">
+    <children>
+        <TreeView fx:id="qualifierTree" prefHeight="300.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="30.0" />
+        <TreeView fx:id="summarizer1Tree" prefHeight="300.0" prefWidth="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="30.0" />
+        <TreeView fx:id="summarizer2Tree" layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="200.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="30.0" />
+        <Label alignment="CENTER" layoutY="10.0" prefWidth="200.0" text="Qualifier" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
+        <Label alignment="CENTER" layoutY="10.0" prefWidth="200.0" text="Summarizer 1" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="10.0" />
+        <Label alignment="CENTER" layoutY="10.0" prefWidth="200.0" text="Summarizer 2" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="10.0" />
+        <VBox layoutX="622.0" layoutY="63.0" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <RadioButton fx:id="andRadio" mnemonicParsing="false" text="AND">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="andOrToggleGroup" />
+                    </toggleGroup>
+                   <padding>
+                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                   </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+                </RadioButton>
+                <RadioButton fx:id="orRadio" mnemonicParsing="false" text="OR" toggleGroup="$andOrToggleGroup">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+                </RadioButton>
+            </children>
+        </VBox>
+      <Button layoutX="629.0" layoutY="237.0" mnemonicParsing="false" onAction="#generate" prefHeight="88.0" prefWidth="145.0" text="Generuj">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <VBox layoutX="640.0" layoutY="162.0" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <Label alignment="CENTER" text="Rodzaj raportu">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="simpleRadio" mnemonicParsing="false" selected="true" text="prosty">
+               <toggleGroup>
+                  <ToggleGroup fx:id="simpleComplexToggleGroup" />
+               </toggleGroup>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="complexRadio" mnemonicParsing="false" text="złożony" toggleGroup="$simpleComplexToggleGroup">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </VBox>
+      <TextArea fx:id="textArea" editable="false" layoutX="70.0" layoutY="344.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="350.0" />
+    </children>
+</AnchorPane>

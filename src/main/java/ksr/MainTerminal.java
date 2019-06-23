@@ -24,11 +24,11 @@ public class MainTerminal {
 
         ArrayList<LinguisticVariable> andOrList = new ArrayList<>(Arrays.asList(
                 new LinguisticVariable("and", new And()),
-                new LinguisticVariable("of", new Or())
+                new LinguisticVariable("or", new Or())
         ));
 
         for (int i = 0; i < StaticVariable.staticVariables.size(); i++) {
-            System.out.println(" > " + i + "\t " + StaticVariable.staticVariables.get(i).name);
+            System.out.println(" > " + i + "\t " + StaticVariable.staticVariables.get(i).fullName());
         }
 
         System.out.print("\n[0]Simple or [1]Complex report?  ");

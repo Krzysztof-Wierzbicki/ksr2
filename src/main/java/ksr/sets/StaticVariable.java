@@ -4,8 +4,9 @@ import ksr.calculations.ConstantMembership;
 import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StaticVariable {
 
@@ -14,7 +15,7 @@ public class StaticVariable {
     //</editor-fold desc="race">
     //<editor-fold desc="age">
     public static LinguisticVariable ageTeen = new LinguisticVariable(
-            "age: teen",
+            "age", "teen",
             x -> new TrapezoidMembership(15, 15, 17, 19).getMembership(x.age),
             new FuzzySet<>(
                     new TrapezoidMembership(15, 15, 17, 15),
@@ -22,7 +23,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable ageYoungAdult = new LinguisticVariable(
-            "age: young adult",
+            "age", "young adult",
             x -> new TrapezoidMembership(18, 20, 25, 27).getMembership(x.age),
             new FuzzySet<>(
                     new TrapezoidMembership(18, 20, 25, 27),
@@ -30,7 +31,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable ageAdult = new LinguisticVariable(
-            "age: adult",
+            "age", "adult",
             x -> new TrapezoidMembership(26, 29, 33, 39).getMembership(x.age),
             new FuzzySet<>(
                     new TrapezoidMembership(26, 29, 33, 39),
@@ -38,7 +39,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable ageOldAdult = new LinguisticVariable(
-            "age: old adult",
+            "age", "old adult",
             x -> new TrapezoidMembership(35, 40, 44, 44).getMembership(x.age),
             new FuzzySet<>(
                     new TrapezoidMembership(35, 40, 44, 44),
@@ -50,7 +51,7 @@ public class StaticVariable {
     //</editor-fold desc="maritalStatus">
     //<editor-fold desc="numberOfKids">
     public static LinguisticVariable kidsFew = new LinguisticVariable(
-            "numberOfKids: few kids",
+            "number of kids", "few kids",
             x -> new TriangularMembership(0, 0, 3).getMembership(x.numberOfKids),
             new FuzzySet<>(
                     new TriangularMembership(0, 0, 3),
@@ -58,7 +59,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable kidsMany = new LinguisticVariable(
-            "numberOfKids: many kids",
+            "number of kids", "many kids",
             x -> new TriangularMembership(2, 5, 5).getMembership(x.numberOfKids),
             new FuzzySet<>(
                     new TriangularMembership(2, 5, 5),
@@ -69,8 +70,9 @@ public class StaticVariable {
     //<editor-fold desc="schoolType">
     //</editor-fold desc="schoolType">
     //<editor-fold desc="maxGrade">
+    // TODO: fix it
     public static LinguisticVariable gradesLow = new LinguisticVariable(
-            "maxGrade: around 2 grades",
+            "max grade", "around 2 grades",
             x -> new TrapezoidMembership(1, 1, 3, 4).getMembership(x.maxGrade),
             new FuzzySet<>(
                     new TrapezoidMembership(1, 1, 3, 4),
@@ -78,7 +80,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable gradesMedium = new LinguisticVariable(
-            "maxGrade: some grades",
+            "max grade", "some grades",
             x -> new TrapezoidMembership(3, 5, 7, 9).getMembership(x.maxGrade),
             new FuzzySet<>(
                     new TrapezoidMembership(3, 5, 7, 9),
@@ -86,7 +88,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable gradesHigh = new LinguisticVariable(
-            "maxGrade: all/almost all grades",
+            "max grade", "all/almost all grades",
             x -> new TrapezoidMembership(8, 11, 12, 12).getMembership(x.maxGrade),
             new FuzzySet<>(
                     new TrapezoidMembership(8, 11, 12, 12),
@@ -100,7 +102,7 @@ public class StaticVariable {
     //</editor-fold desc="degree">
     //<editor-fold desc="pregnancyCount">
     public static LinguisticVariable pregnanciesLow = new LinguisticVariable(
-            "pregnancyCount: low amount of pregnancies",
+            "pregnancy count", "low amount of pregnancies",
             x -> new TrapezoidMembership(0, 0, 2, 6).getMembership(x.pregnancyCount),
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 2, 6),
@@ -108,7 +110,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable pregnanciesMedium = new LinguisticVariable(
-            "pregnancyCount: medium amount of pregnancies",
+            "pregnancy count", "medium amount of pregnancies",
             x -> new TrapezoidMembership(4, 6, 8, 10).getMembership(x.pregnancyCount),
             new FuzzySet<>(
                     new TrapezoidMembership(4, 6, 8, 10),
@@ -116,7 +118,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable pregnanciesHigh = new LinguisticVariable(
-            "pregnancyCount: high amount of pregnancies",
+            "pregnancy count", "high amount of pregnancies",
             x -> new TrapezoidMembership(8, 10, 20, 20).getMembership(x.pregnancyCount),
             new FuzzySet<>(
                     new TrapezoidMembership(8, 10, 20, 20),
@@ -126,7 +128,7 @@ public class StaticVariable {
     //</editor-fold desc="pregnancyCount">
     //<editor-fold desc="marriageCount">
     public static LinguisticVariable marriagesFew = new LinguisticVariable(
-            "marriageCount: few marriages",
+            "marriage count", "few marriages",
             x -> new TriangularMembership(0, 0, 3).getMembership(x.marriageCount),
             new FuzzySet<>(
                     new TriangularMembership(0, 0, 3),
@@ -134,7 +136,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable marriagesMany = new LinguisticVariable(
-            "marriageCount: many marriages",
+            "marriage count", "many marriages",
             x -> new TrapezoidMembership(2, 3, 6, 6).getMembership(x.marriageCount),
             new FuzzySet<>(
                     new TrapezoidMembership(2, 3, 6, 6),
@@ -150,7 +152,7 @@ public class StaticVariable {
     //</editor-fold desc="workType">
     //<editor-fold desc="weight">
     public static LinguisticVariable weightLight = new LinguisticVariable(
-            "weight: light",
+            "weight", "light",
             x -> new TrapezoidMembership(0, 0, 50, 57).getMembership(x.weight),
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 50, 57),
@@ -158,7 +160,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable weightMedium = new LinguisticVariable(
-            "weight: medium",
+            "weight", "medium",
             x -> new TrapezoidMembership(53, 60, 65, 72).getMembership(x.weight),
             new FuzzySet<>(
                     new TrapezoidMembership(53, 60, 65, 72),
@@ -166,7 +168,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable weightHeavy = new LinguisticVariable(
-            "weight: heavy",
+            "weight", "heavy",
             x -> new TrapezoidMembership(70, 80, 125, 125).getMembership(x.weight),
             new FuzzySet<>(
                     new TrapezoidMembership(70, 80, 125, 125),
@@ -176,7 +178,7 @@ public class StaticVariable {
     //</editor-fold desc="weight">
     //<editor-fold desc="height">
     public static LinguisticVariable heightShort = new LinguisticVariable(
-            "height: short",
+            "height", "short",
             x -> new TrapezoidMembership(0, 0, 150, 165).getMembership(x.height),
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 150, 165),
@@ -184,7 +186,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable heightMedium = new LinguisticVariable(
-            "height: medium",
+            "height", "medium",
             x -> new TrapezoidMembership(160, 165, 170, 175).getMembership(x.height),
             new FuzzySet<>(
                     new TrapezoidMembership(160, 165, 170, 175),
@@ -192,7 +194,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable heightTall = new LinguisticVariable(
-            "height: tall",
+            "height", "tall",
             x -> new TrapezoidMembership(170, 175, 180, 180).getMembership(x.height),
             new FuzzySet<>(
                     new TrapezoidMembership(170, 175, 180, 180),
@@ -202,7 +204,7 @@ public class StaticVariable {
     //</editor-fold desc="height">
     //<editor-fold desc="earnings">
     public static LinguisticVariable earningsLow = new LinguisticVariable(
-            "earnings: low earnings",
+            "earnings", "low earnings",
             x -> new TrapezoidMembership(0, 0, 12500, 25000).getMembership(x.earnings),
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 12500, 2500),
@@ -210,7 +212,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable earningsMedium = new LinguisticVariable(
-            "earnings: medium earnings",
+            "earnings", "medium earnings",
             x -> new TrapezoidMembership(20000, 25000, 35000, 40000).getMembership(x.earnings),
             new FuzzySet<>(
                     new TrapezoidMembership(20000, 25000, 35000, 40000),
@@ -218,7 +220,7 @@ public class StaticVariable {
             )
     );
     public static LinguisticVariable earningsHigh = new LinguisticVariable(
-            "earnings: high earnings",
+            "earnings", "high earnings",
             x -> new TrapezoidMembership(35000, 50000, 2137000, 2137000).getMembership(x.earnings),
             new FuzzySet<>(
                     new TrapezoidMembership(35000, 50000, 2137000, 2137000),
@@ -228,7 +230,7 @@ public class StaticVariable {
     //</editor-fold desc="earnings">
     //<editor-fold desc="none">
     public static LinguisticVariable none = new LinguisticVariable(
-            " - ",
+            "",
             x -> new ConstantMembership().getMembership(0.0),
             new FuzzySet<>(
                     new ConstantMembership(),
@@ -248,4 +250,18 @@ public class StaticVariable {
             heightShort, heightMedium, heightTall,
             earningsLow, earningsMedium, earningsHigh
     ));
+
+    public static Map<String, List<LinguisticVariable>> categorisedVariables = new HashMap<>();
+
+    static {
+        for(LinguisticVariable variable : staticVariables){
+            if(variable.category.equals("")){
+                continue;
+            }
+            if(!categorisedVariables.containsKey(variable.category)){
+                categorisedVariables.put(variable.category, new ArrayList<>());
+            }
+            categorisedVariables.get(variable.category).add(variable);
+        }
+    }
 }
