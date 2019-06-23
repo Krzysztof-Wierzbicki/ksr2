@@ -19,7 +19,6 @@ public class Controller implements Initializable {
     public TreeView<LinguisticVariable> summarizer1Tree;
     public TreeView<LinguisticVariable> summarizer2Tree;
     public RadioButton andRadio, orRadio;
-    public RadioButton simpleRadio, complexRadio;
     public TextArea textArea;
 
     private ReportGenerator reportGenerator;
@@ -61,14 +60,27 @@ public class Controller implements Initializable {
         LinguisticVariable summarizer1 = null;
         LinguisticVariable summarizer2 = null;
         LinguisticVariable andOr = null;
-        try {
-            List<TreeItem<LinguisticVariable>> qualifierList = qualifierTree.getSelectionModel().getSelectedItems();
-            List<TreeItem<LinguisticVariable>> sum1List = summarizer1Tree.getSelectionModel().getSelectedItems();
-            List<TreeItem<LinguisticVariable>> sum2List = summarizer2Tree.getSelectionModel().getSelectedItems();
+        boolean simple = true;
+
+        List<TreeItem<LinguisticVariable>> qualifierList = qualifierTree.getSelectionModel().getSelectedItems();
+        List<TreeItem<LinguisticVariable>> sum1List = summarizer1Tree.getSelectionModel().getSelectedItems();
+        List<TreeItem<LinguisticVariable>> sum2List = summarizer2Tree.getSelectionModel().getSelectedItems();
+        if(qualifierList.size() > 0){
             qualifier = qualifierList.get(0).getValue();
+        }else{
+            qualifier = StaticVariable.none;
+        }
+        if(sum1List.size() > 0 && sum2List.size() > 0){
             summarizer1 = sum1List.get(0).getValue();
             summarizer2 = sum2List.get(0).getValue();
-        } catch (NullPointerException ex) {
+            simple = false;
+        }else if(sum1List.size() > 0){
+            summarizer1 = sum1List.get(0).getValue();
+            summarizer2 = StaticVariable.none;
+        }else if(sum2List.size() > 0){
+            summarizer1 = sum2List.get(0).getValue();
+            summarizer2 = StaticVariable.none;
+        }else{
             showChoiceAlert();
             return;
         }
@@ -83,8 +95,10 @@ public class Controller implements Initializable {
         }else if(orRadio.isSelected()){
             andOr = new LinguisticVariable("or", new Or());
         }else{
-            showChoiceAlert();
-            return;
+            if(!simple){
+                showChoiceAlert();
+                return;
+            }
         }
 
         reportGenerator.setQualifier(qualifier);
@@ -93,10 +107,10 @@ public class Controller implements Initializable {
         reportGenerator.setAndOr(andOr);
 
         try {
-            if(complexRadio.isSelected()){
-                reportGenerator.generateComplex();
-            }else if(simpleRadio.isSelected()){
+            if(simple){
                 reportGenerator.generate();
+            }else{
+                reportGenerator.generateComplex();
             }
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
@@ -106,16 +120,16 @@ public class Controller implements Initializable {
 
     private void showChoiceAlert(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText("Należy wybrać kwalifikator, dwa sumaryzatory oraz sposób ich łączenia");
-        alert.setHeaderText("Nie wybrano opcji");
-        alert.setTitle("Błąd");
+        alert.setContentText("At least one summarizer must be selected");
+        alert.setHeaderText("Options not chosen");
+        alert.setTitle("Error");
         alert.show();
     }
 
     private void showInitAlert(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText("Błąd w trakcie inicjalizacji");
-        alert.setTitle("Błąd");
+        alert.setContentText("Initialization error");
+        alert.setTitle("Error");
         alert.showAndWait();
     }
 }

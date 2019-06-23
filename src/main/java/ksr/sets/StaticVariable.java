@@ -5,8 +5,6 @@ import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class StaticVariable {
 
@@ -20,7 +18,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(15, 15, 17, 15),
                     x -> (double) x.age
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable ageYoungAdult = new LinguisticVariable(
             "age", "young adult",
@@ -28,7 +27,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(18, 20, 25, 27),
                     x -> (double) x.age
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable ageAdult = new LinguisticVariable(
             "age", "adult",
@@ -36,7 +36,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(26, 29, 33, 39),
                     x -> (double) x.age
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable ageOldAdult = new LinguisticVariable(
             "age", "old adult",
@@ -44,7 +45,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(35, 40, 44, 44),
                     x -> (double) x.age
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     //</editor-fold desc="age">
     //<editor-fold desc="maritalStatus">
@@ -56,7 +58,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TriangularMembership(0, 0, 3),
                     x -> (double) x.numberOfKids
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable kidsMany = new LinguisticVariable(
             "number of kids", "many kids",
@@ -64,7 +67,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TriangularMembership(2, 5, 5),
                     x -> (double) x.numberOfKids
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="numberOfKids">
     //<editor-fold desc="schoolType">
@@ -77,7 +81,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(1, 1, 3, 4),
                     x -> (double) x.maxGrade
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable gradesMedium = new LinguisticVariable(
             "max grade", "some grades",
@@ -85,7 +90,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(3, 5, 7, 9),
                     x -> (double) x.maxGrade
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable gradesHigh = new LinguisticVariable(
             "max grade", "all/almost all grades",
@@ -93,7 +99,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(8, 11, 12, 12),
                     x -> (double) x.maxGrade
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="maxGrade">
     //<editor-fold desc="completed">
@@ -107,7 +114,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 2, 6),
                     x -> (double) x.pregnancyCount
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable pregnanciesMedium = new LinguisticVariable(
             "pregnancy count", "medium amount of pregnancies",
@@ -115,7 +123,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(4, 6, 8, 10),
                     x -> (double) x.pregnancyCount
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable pregnanciesHigh = new LinguisticVariable(
             "pregnancy count", "high amount of pregnancies",
@@ -123,7 +132,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(8, 10, 20, 20),
                     x -> (double) x.pregnancyCount
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="pregnancyCount">
     //<editor-fold desc="marriageCount">
@@ -133,7 +143,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TriangularMembership(0, 0, 3),
                     x -> (double) x.marriageCount
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable marriagesMany = new LinguisticVariable(
             "marriage count", "many marriages",
@@ -141,7 +152,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(2, 3, 6, 6),
                     x -> (double) x.marriageCount
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="marriageCount">
     //<editor-fold desc="religion">
@@ -157,7 +169,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 50, 57),
                     x -> (double) x.weight
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable weightMedium = new LinguisticVariable(
             "weight", "medium",
@@ -165,7 +178,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(53, 60, 65, 72),
                     x -> (double) x.weight
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable weightHeavy = new LinguisticVariable(
             "weight", "heavy",
@@ -173,7 +187,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(70, 80, 125, 125),
                     x -> (double) x.weight
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     //</editor-fold desc="weight">
     //<editor-fold desc="height">
@@ -183,7 +198,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 150, 165),
                     x -> (double) x.height
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable heightMedium = new LinguisticVariable(
             "height", "medium",
@@ -191,7 +207,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(160, 165, 170, 175),
                     x -> (double) x.height
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     public static LinguisticVariable heightTall = new LinguisticVariable(
             "height", "tall",
@@ -199,7 +216,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(170, 175, 180, 180),
                     x -> (double) x.height
-            )
+            ),
+            LinguisticVariable.IsHave.IS
     );
     //</editor-fold desc="height">
     //<editor-fold desc="earnings">
@@ -209,7 +227,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(0, 0, 12500, 2500),
                     x -> (double) x.earnings
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable earningsMedium = new LinguisticVariable(
             "earnings", "medium earnings",
@@ -217,7 +236,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(20000, 25000, 35000, 40000),
                     x -> (double) x.earnings
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable earningsHigh = new LinguisticVariable(
             "earnings", "high earnings",
@@ -225,7 +245,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new TrapezoidMembership(35000, 50000, 2137000, 2137000),
                     x -> (double) x.earnings
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="earnings">
     //<editor-fold desc="none">
@@ -235,7 +256,8 @@ public class StaticVariable {
             new FuzzySet<>(
                     new ConstantMembership(),
                     x -> 0.0
-            )
+            ),
+            LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc=" - ">
 

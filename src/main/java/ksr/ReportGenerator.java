@@ -26,8 +26,8 @@ public class ReportGenerator {
     public void generate() throws NoSuchFieldException, IllegalAccessException {
         summaries = new ArrayList<>();
         for (LinguisticVariable quantifier : quantifiers) {
-            String x = !qualifier.name.equals(StaticVariable.none.name) ? " of females being/having " + qualifier.name : " of females";
-            String summary = "> " + quantifier.name + x + " are/have " + summarizer1.name + "\n";
+            String x = !qualifier.name.equals(StaticVariable.none.name) ? " of females " + qualifier.isHaveContinuous() + " " + qualifier.name : " of females";
+            String summary = "> " + quantifier.name + x + " " + summarizer1.isHaveSimple() + " " + summarizer1.name + "\n";
             SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, summarizer1, summary);
             summaries.add(pair);
         }
@@ -39,9 +39,9 @@ public class ReportGenerator {
         summaries = new ArrayList<>();
         andOr.set.setAllFuzzySets(Arrays.asList(summarizer1.set, summarizer2.set));
         for (LinguisticVariable quantifier : quantifiers) {
-            String x = !qualifier.name.equals(StaticVariable.none.name) ? " of females being/having " + qualifier.name : " of females";
-            String summary = "> " + quantifier.name + x + " are/have "
-                    + summarizer1.name + " " + andOr.name + " " + summarizer2.name + "\n";
+            String x = !qualifier.name.equals(StaticVariable.none.name) ? " of females " + qualifier.isHaveContinuous() + " " + qualifier.name : " of females";
+            String summary = "> " + quantifier.name + x + " " + summarizer1.isHaveSimple() + " "
+                    + summarizer1.name + " " + andOr.name + " " + summarizer2.isHaveSimple() + " " + summarizer2.name + "\n";
             SimpleEntry<Double, Pair<String, ArrayList<Double>>> pair = pair(quantifier, andOr, summary);
             summaries.add(pair);
         }

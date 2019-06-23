@@ -7,12 +7,18 @@ import java.util.function.Function;
 
 public class LinguisticVariable {
 
+    enum IsHave {
+        IS,
+        HAVE
+    }
+
     public String name;
     public String category;
     public XMembership xmembership;
     public Function<Entity, Double> extractor;
     public FuzzySet<Entity> set;
     public boolean absolute;
+    public IsHave isHave;
 
     public LinguisticVariable(String name, FuzzySet<Entity> set) {
         this.name = name;
@@ -26,18 +32,20 @@ public class LinguisticVariable {
         this.category = category;
     }
 
-    public LinguisticVariable(String name, Function<Entity, Double> extractor, FuzzySet<Entity> set) {
+    public LinguisticVariable(String name, Function<Entity, Double> extractor, FuzzySet<Entity> set, IsHave isHave) {
         this.name = name;
         this.extractor = extractor;
         this.set = set;
         this.category = "";
+        this.isHave = isHave;
     }
 
-    public LinguisticVariable(String category, String name, Function<Entity, Double> extractor, FuzzySet<Entity> set) {
+    public LinguisticVariable(String category, String name, Function<Entity, Double> extractor, FuzzySet<Entity> set, IsHave isHave) {
         this.name = name;
         this.extractor = extractor;
         this.set = set;
         this.category = category;
+        this.isHave = isHave;
     }
 
     public LinguisticVariable(String name, XMembership xmembership, boolean absolute) {
@@ -69,5 +77,21 @@ public class LinguisticVariable {
 
     public boolean isDummy(){
         return false;
+    }
+
+    public String isHaveSimple(){
+        if(isHave == IsHave.IS){
+            return "are";
+        }else{
+            return "have";
+        }
+    }
+
+    public String isHaveContinuous(){
+        if(isHave == IsHave.IS){
+            return "being";
+        }else{
+            return "having";
+        }
     }
 }
