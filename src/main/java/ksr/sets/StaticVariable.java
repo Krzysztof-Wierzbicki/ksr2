@@ -3,8 +3,11 @@ package ksr.sets;
 import ksr.calculations.ConstantMembership;
 import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
+import ksr.model.Degree;
+import ksr.model.Entity;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class StaticVariable {
 
@@ -74,35 +77,48 @@ public class StaticVariable {
     //<editor-fold desc="schoolType">
     //</editor-fold desc="schoolType">
     //<editor-fold desc="maxGrade">
-    // TODO: fix it
-    public static LinguisticVariable gradesLow = new LinguisticVariable(
-            "max grade", "around 2 grades",
-            x -> new TrapezoidMembership(1, 1, 3, 4).getMembership(x.maxGrade),
-            new FuzzySet<>(
-                    new TrapezoidMembership(1, 1, 3, 4),
-                    x -> (double) x.maxGrade
-            ),
-            LinguisticVariable.IsHave.HAVE
-    );
-    public static LinguisticVariable gradesMedium = new LinguisticVariable(
-            "max grade", "some grades",
-            x -> new TrapezoidMembership(3, 5, 7, 9).getMembership(x.maxGrade),
-            new FuzzySet<>(
-                    new TrapezoidMembership(3, 5, 7, 9),
-                    x -> (double) x.maxGrade
-            ),
-            LinguisticVariable.IsHave.HAVE
-    );
-    public static LinguisticVariable gradesHigh = new LinguisticVariable(
-            "max grade", "all/almost all grades",
-            x -> new TrapezoidMembership(8, 11, 12, 12).getMembership(x.maxGrade),
-            new FuzzySet<>(
-                    new TrapezoidMembership(8, 11, 12, 12),
-                    x -> (double) x.maxGrade
-            ),
-            LinguisticVariable.IsHave.HAVE
-    );
     //</editor-fold desc="maxGrade">
+    Function<Entity, Double> lowerDegreeFunction = entity -> {
+        if(entity.degree == Degree.associate){
+            return 1.;
+        }else if(entity.degree == Degree.none){
+            return 0.2;
+        }
+        return 0.;
+    };
+    Function<Entity, Double> mediumDegreeFunction = entity -> {
+        if(entity.degree == Degree.bachelor){
+            return 0.5;
+        }else if(entity.degree == Degree.master){
+            return 1.;
+        }else if(entity.degree == Degree.doctorate){
+            return 0.2;
+        }
+        return 0.;
+    };
+    Function<Entity, Double> higherDegreeFunction = entity -> {
+        if(entity.degree == Degree.doctorate){
+            return 0.8;
+        }else if(entity.degree == Degree.professional){
+            return 1.;
+        }
+        return 0.;
+    };
+    public static LinguisticVariable lowerDegree = new LinguisticVariable(
+            "degree", "lower degree",
+            lowerDegreeFunction,
+            LinguisticVariable.IsHave.HAVE
+    );
+    public static LinguisticVariable mediumDegree = new LinguisticVariable(
+            "degree", "medium degree",
+            mediumDegreeFunction,
+            LinguisticVariable.IsHave.HAVE
+    );
+    public static LinguisticVariable higherDegree = new LinguisticVariable(
+            "degree", "higher degree",
+            higherDegreeFunction,
+            LinguisticVariable.IsHave.HAVE
+    );
     //<editor-fold desc="completed">
     //</editor-fold desc="completed">
     //<editor-fold desc="degree">

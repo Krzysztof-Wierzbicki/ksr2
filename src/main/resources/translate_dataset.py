@@ -27,26 +27,12 @@ def mar_stat(code):
     }[code]
 
 
-def school(code):
+def years_of_education(code):
     int_code = int(code[0:2])
-    result = {}
-    if 9 <= int_code <= 12:
-        result['type'] = 'school'
-        result['value'] = int_code
-    elif int_code <= 19:
-        result['type'] = 'college'
-        result['value'] = int_code - 12
+    if 9 <= int_code <= 19:
+        return int_code
     else:
         raise KeyError()
-
-    if code[2] == '1':
-        result['completed'] = True
-    elif code[2] == '5':
-        result['completed'] = False
-    else:
-        raise KeyError()
-
-    return '{},{},{}'.format(result['type'], result['value'], result['completed'])
 
 
 def degree(code):
@@ -142,25 +128,25 @@ def earn(code):
     }[code]
 
 
+
 file_description = [
     #name, start, end, type
     ('id', 0, 4, int),
     ('race', 9, 9, race),
     ('age', 18, 19, int),
-    ('marital status', 20, 20, mar_stat),
-    ('kids no', 31, 31, int),
-    ('school type,maxgrade,comleted', 38, 40, school),
+    ('marital_status', 20, 20, mar_stat),
+    ('kids_no', 31, 31, int),
+    ('years_of_education', 38, 40, years_of_education),
     ('degree', 68, 68, degree),
-    ('pregnancy count', 101, 102, int_cutoff),
-    ('marriage count', 726, 727, int_cutoff),
+    ('pregnancy_count', 101, 102, int_cutoff),
+    ('marriage_count', 726, 727, int_cutoff),
     ('religion', 4727, 4728, religion),
-    ('ever worked', 4736, 4736, yes_no),
-    ('work type', 4750, 4750, work),
-    ('weight (kg)', 4815, 4817, weight),
-    ('height (cm)', 4818, 4819, height),
-    ('earnings ($)', 4823, 4824, earn)
+    ('ever_worked', 4736, 4736, yes_no),
+    ('work_type', 4750, 4750, work),
+    ('weight', 4815, 4817, weight),
+    ('height', 4818, 4819, height),
+    ('earnings', 4823, 4824, earn)
 ]
-
 def main():
     with open('2006_2010_FemResp.dat') as data, open('data.csv', 'w+') as output:
         line_str = ''
