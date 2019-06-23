@@ -78,7 +78,7 @@ public class StaticVariable {
     //</editor-fold desc="schoolType">
     //<editor-fold desc="maxGrade">
     //</editor-fold desc="maxGrade">
-    Function<Entity, Double> lowerDegreeFunction = entity -> {
+    static Function<Entity, Double> lowerDegreeFunction = entity -> {
         if(entity.degree == Degree.associate){
             return 1.;
         }else if(entity.degree == Degree.none){
@@ -86,7 +86,7 @@ public class StaticVariable {
         }
         return 0.;
     };
-    Function<Entity, Double> mediumDegreeFunction = entity -> {
+    static Function<Entity, Double> mediumDegreeFunction = entity -> {
         if(entity.degree == Degree.bachelor){
             return 0.5;
         }else if(entity.degree == Degree.master){
@@ -96,7 +96,7 @@ public class StaticVariable {
         }
         return 0.;
     };
-    Function<Entity, Double> higherDegreeFunction = entity -> {
+    static Function<Entity, Double> higherDegreeFunction = entity -> {
         if(entity.degree == Degree.doctorate){
             return 0.8;
         }else if(entity.degree == Degree.professional){
@@ -107,16 +107,19 @@ public class StaticVariable {
     public static LinguisticVariable lowerDegree = new LinguisticVariable(
             "degree", "lower degree",
             lowerDegreeFunction,
+            new EnumFuzzySet<Degree>(lowerDegreeFunction),
             LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable mediumDegree = new LinguisticVariable(
             "degree", "medium degree",
             mediumDegreeFunction,
+            new EnumFuzzySet<Degree>(mediumDegreeFunction),
             LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable higherDegree = new LinguisticVariable(
             "degree", "higher degree",
             higherDegreeFunction,
+            new EnumFuzzySet<Degree>(higherDegreeFunction),
             LinguisticVariable.IsHave.HAVE
     );
     //<editor-fold desc="completed">
