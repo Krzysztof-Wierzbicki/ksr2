@@ -2,6 +2,7 @@ package ksr.sets;
 
 import ksr.model.Degree;
 import ksr.model.Entity;
+import ksr.model.Race;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class EnumFuzzySet<T extends Enum<T>> extends FuzzySet<Entity> {
             Entity ent = new Entity();
             if(enumClass == Degree.class || e instanceof Degree){
                 ent.degree = (Degree) e;
+            }else if(enumClass == Race.class || e instanceof Race){
+                ent.race = (Race) e;
             }
             sum += extractor.apply(ent);
         }

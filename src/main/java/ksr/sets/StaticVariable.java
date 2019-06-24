@@ -5,14 +5,43 @@ import ksr.calculations.TrapezoidMembership;
 import ksr.calculations.TriangularMembership;
 import ksr.model.Degree;
 import ksr.model.Entity;
+import ksr.model.Race;
 
 import java.util.*;
 import java.util.function.Function;
 
 public class StaticVariable {
 
-    // TODO: race, maritalStatus, schoolType, completed, degree, religion, everWorked, workType
+    // TODO: religion, everWorked, workType
     //<editor-fold desc="race">
+    private static Function<Entity, Double> whiteFunc = entity -> (entity.race == Race.white) ? 1. : 0.;
+    private static Function<Entity, Double> blackFunc = entity -> (entity.race == Race.black) ? 1. : 0.;
+    private static Function<Entity, Double> hispanicFunc = entity -> (entity.race == Race.hispanic) ? 1. : 0.;
+    private static Function<Entity, Double> otherFunc = entity -> (entity.race == Race.other) ? 1. : 0.;
+    public static LinguisticVariable raceWhite = new LinguisticVariable(
+            "race", "white",
+            whiteFunc,
+            new EnumFuzzySet<>(whiteFunc, Race.other),
+            LinguisticVariable.IsHave.IS
+    );
+    public static LinguisticVariable raceBlack = new LinguisticVariable(
+            "race", "black",
+            blackFunc,
+            new EnumFuzzySet<>(blackFunc, Race.other),
+            LinguisticVariable.IsHave.IS
+    );
+    public static LinguisticVariable raceHispanic = new LinguisticVariable(
+            "race", "hispanic",
+            hispanicFunc,
+            new EnumFuzzySet<>(hispanicFunc, Race.other),
+            LinguisticVariable.IsHave.IS
+    );
+    public static LinguisticVariable raceOther = new LinguisticVariable(
+            "race", "other",
+            otherFunc,
+            new EnumFuzzySet<>(otherFunc, Race.other),
+            LinguisticVariable.IsHave.IS
+    );
     //</editor-fold desc="race">
     //<editor-fold desc="age">
     public static LinguisticVariable ageTeen = new LinguisticVariable(
@@ -282,6 +311,7 @@ public class StaticVariable {
 
     public static ArrayList<LinguisticVariable> staticVariables = new ArrayList<>(Arrays.asList(
             none,
+            raceWhite, raceBlack, raceHispanic, raceOther,
             ageTeen, ageYoungAdult, ageAdult, ageOldAdult,
             kidsFew, kidsMany,
             lowerDegree, mediumDegree, higherDegree,
