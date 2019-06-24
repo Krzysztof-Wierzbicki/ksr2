@@ -103,10 +103,35 @@ public class StaticVariable {
             LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="numberOfKids">
-    //<editor-fold desc="schoolType">
-    //</editor-fold desc="schoolType">
-    //<editor-fold desc="maxGrade">
-    //</editor-fold desc="maxGrade">
+    //<editor-fold desc="yearsOfEducation">
+    public static LinguisticVariable fewYears = new LinguisticVariable(
+            "years of education", "few",
+            x -> new TrapezoidMembership(9, 9, 10, 12).getMembership(x.yearsOfEducation),
+            new FuzzySet<>(
+                    new TrapezoidMembership(9, 9, 10, 12),
+                    x -> (double) x.yearsOfEducation
+            ),
+            LinguisticVariable.IsHave.HAVE
+    );
+    public static LinguisticVariable normalYears = new LinguisticVariable(
+            "years of education", "normal",
+            x -> new TrapezoidMembership(10, 12, 14, 15).getMembership(x.yearsOfEducation),
+            new FuzzySet<>(
+                    new TrapezoidMembership(10, 12, 14, 15),
+                    x -> (double) x.yearsOfEducation
+            ),
+            LinguisticVariable.IsHave.HAVE
+    );
+    public static LinguisticVariable manyYears = new LinguisticVariable(
+            "years of education", "many",
+            x -> new TrapezoidMembership(14, 16, 20, 20).getMembership(x.yearsOfEducation),
+            new FuzzySet<>(
+                    new TrapezoidMembership(14, 16, 20, 20),
+                    x -> (double) x.yearsOfEducation
+            ),
+            LinguisticVariable.IsHave.HAVE
+    );
+    //</editor-fold desc="yearsOfEducation">
     //<editor-fold desc="degree">
     static Function<Entity, Double> lowerDegreeFunction = entity -> {
         if(entity.degree == Degree.associate){
@@ -153,8 +178,6 @@ public class StaticVariable {
             LinguisticVariable.IsHave.HAVE
     );
     //</editor-fold desc="degree">
-    //<editor-fold desc="completed">
-    //</editor-fold desc="completed">
     //<editor-fold desc="pregnancyCount">
     public static LinguisticVariable pregnanciesLow = new LinguisticVariable(
             "pregnancy count", "low amount of pregnancies",
@@ -315,6 +338,7 @@ public class StaticVariable {
             ageTeen, ageYoungAdult, ageAdult, ageOldAdult,
             kidsFew, kidsMany,
             lowerDegree, mediumDegree, higherDegree,
+            fewYears, normalYears, manyYears,
             pregnanciesLow, pregnanciesMedium, pregnanciesHigh,
             marriagesFew, marriagesMany,
             weightLight, weightMedium, weightHeavy,
