@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class EnumFuzzySet<Enum> extends FuzzySet<Entity> {
+public class EnumFuzzySet<T extends Enum<T>> extends FuzzySet<Entity> {
 
-    public EnumFuzzySet(Function<Entity, Double> extractor){
+    private Class<? extends Enum> enumClass;
+
+    public EnumFuzzySet(Function<Entity, Double> extractor, T val){
         this.extractor = extractor;
+        this.enumClass = val.getClass();
     }
 
     public EnumFuzzySet() {
@@ -25,9 +28,9 @@ public class EnumFuzzySet<Enum> extends FuzzySet<Entity> {
     @Override
     public double cardinality() {
         double sum = 0;
-        for(Enum e : Enum.values()){
+        for(Enum e : enumClass.getEnumConstants()){
             Entity ent = new Entity();
-            if(e instanceof Degree){
+            if(enumClass == Degree.class || e instanceof Degree){
                 ent.degree = (Degree) e;
             }
             sum += extractor.apply(ent);

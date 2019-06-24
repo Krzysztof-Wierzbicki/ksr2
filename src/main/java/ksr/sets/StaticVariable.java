@@ -78,6 +78,7 @@ public class StaticVariable {
     //</editor-fold desc="schoolType">
     //<editor-fold desc="maxGrade">
     //</editor-fold desc="maxGrade">
+    //<editor-fold desc="degree">
     static Function<Entity, Double> lowerDegreeFunction = entity -> {
         if(entity.degree == Degree.associate){
             return 1.;
@@ -107,25 +108,24 @@ public class StaticVariable {
     public static LinguisticVariable lowerDegree = new LinguisticVariable(
             "degree", "lower degree",
             lowerDegreeFunction,
-            new EnumFuzzySet<Degree>(lowerDegreeFunction),
+            new EnumFuzzySet<>(lowerDegreeFunction, Degree.none),
             LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable mediumDegree = new LinguisticVariable(
             "degree", "medium degree",
             mediumDegreeFunction,
-            new EnumFuzzySet<Degree>(mediumDegreeFunction),
+            new EnumFuzzySet<>(mediumDegreeFunction, Degree.none),
             LinguisticVariable.IsHave.HAVE
     );
     public static LinguisticVariable higherDegree = new LinguisticVariable(
             "degree", "higher degree",
             higherDegreeFunction,
-            new EnumFuzzySet<Degree>(higherDegreeFunction),
+            new EnumFuzzySet<>(higherDegreeFunction, Degree.none),
             LinguisticVariable.IsHave.HAVE
     );
+    //</editor-fold desc="degree">
     //<editor-fold desc="completed">
     //</editor-fold desc="completed">
-    //<editor-fold desc="degree">
-    //</editor-fold desc="degree">
     //<editor-fold desc="pregnancyCount">
     public static LinguisticVariable pregnanciesLow = new LinguisticVariable(
             "pregnancy count", "low amount of pregnancies",
@@ -284,7 +284,7 @@ public class StaticVariable {
             none,
             ageTeen, ageYoungAdult, ageAdult, ageOldAdult,
             kidsFew, kidsMany,
-            gradesLow, gradesMedium, gradesHigh,
+            lowerDegree, mediumDegree, higherDegree,
             pregnanciesLow, pregnanciesMedium, pregnanciesHigh,
             marriagesFew, marriagesMany,
             weightLight, weightMedium, weightHeavy,
