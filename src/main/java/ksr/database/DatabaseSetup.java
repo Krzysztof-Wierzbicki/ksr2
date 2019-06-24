@@ -17,9 +17,10 @@ public class DatabaseSetup {
                 "age integer," +
                 "maritalStatus varchar(50)," +
                 "numberOfKids integer," +
-                "schoolType varchar(50)," +
-                "maxGrade integer," +
-                "completed boolean," +
+                //"schoolType varchar(50)," +
+                //"maxGrade integer," +
+                //"completed boolean," +
+                "yearsOfEducation integer," +
                 "degree varchar(50)," +
                 "pregnancyCount varchar(50)," +
                 "marriageCount varchar(50)," +
@@ -30,7 +31,7 @@ public class DatabaseSetup {
                 "height varchar(50)," +
                 "earnings varchar(50)" +
                 ") as select " +
-                "id,race,age,marital_status,kids_no,school_type,maxgrade,comleted,degree,pregnancy_count,marriage_count,religion,ever_worked,work_type,weight,height,earnings" +
+                "id,race,age,marital_status,kids_no,years_of_education,degree,pregnancy_count,marriage_count,religion,ever_worked,work_type,weight,height,earnings" +
                 " from CSVREAD('./src/main/resources/data.csv');";
         Statement statement = connection.createStatement();
         statement.execute(setup);

@@ -9,9 +9,10 @@ public class Entity {
     public int age;
     public MaritalStatus maritalStatus;
     public int numberOfKids;
-    public SchoolType schoolType;
-    public int maxGrade;
-    public boolean completed;
+    //public SchoolType schoolType;
+    //public int maxGrade;
+    //public boolean completed;
+    public int yearsOfEducation;
     public Degree degree;
     public int pregnancyCount;
     public int marriageCount;
@@ -30,9 +31,10 @@ public class Entity {
         this.age = entityDB.age;
         this.maritalStatus = parseMaritalStatus(entityDB.maritalStatus);
         this.numberOfKids = entityDB.numberOfKids;
-        this.schoolType = parseSchoolType(entityDB.schoolType);
-        this.maxGrade = entityDB.maxGrade;
-        this.completed = entityDB.completed;
+        //this.schoolType = parseSchoolType(entityDB.schoolType);
+        //this.maxGrade = entityDB.maxGrade;
+        //this.completed = entityDB.completed;
+        this.yearsOfEducation = entityDB.yearsOfEducation;
         this.degree = parseDegree(entityDB.degree);
         this.pregnancyCount = parseInt(entityDB.pregnancyCount);
         this.marriageCount = parseInt(entityDB.marriageCount);
@@ -151,9 +153,10 @@ public class Entity {
                 ", age=" + age +
                 ", maritalStatus=" + maritalStatus +
                 ", numberOfKids=" + numberOfKids +
-                ", schoolType=" + schoolType +
-                ", maxGrade=" + maxGrade +
-                ", completed=" + completed +
+                //", schoolType=" + schoolType +
+                //", maxGrade=" + maxGrade +
+                //", completed=" + completed +
+                ", yearsOfEducation=" + yearsOfEducation +
                 ", degree=" + degree +
                 ", pregnancyCount=" + pregnancyCount +
                 ", marriageCount=" + marriageCount +
@@ -174,8 +177,8 @@ public class Entity {
         return Objects.equals(id, entity.id) &&
                 Objects.equals(age, entity.age) &&
                 Objects.equals(numberOfKids, entity.numberOfKids) &&
-                Objects.equals(maxGrade, entity.maxGrade) &&
-                Objects.equals(completed, entity.completed) &&
+                //Objects.equals(maxGrade, entity.maxGrade) &&
+                //Objects.equals(completed, entity.completed) &&
                 Objects.equals(pregnancyCount, entity.pregnancyCount) &&
                 Objects.equals(marriageCount, entity.marriageCount) &&
                 Objects.equals(everWorked, entity.everWorked) &&
@@ -184,9 +187,10 @@ public class Entity {
                 Objects.equals(earnings, entity.earnings) &&
                 Objects.equals(race, entity.race) &&
                 Objects.equals(maritalStatus, entity.maritalStatus) &&
-                Objects.equals(schoolType, entity.schoolType) &&
+                //Objects.equals(schoolType, entity.schoolType) &&
                 Objects.equals(degree, entity.degree) &&
                 Objects.equals(religion, entity.religion) &&
+                Objects.equals(yearsOfEducation, entity.yearsOfEducation) &&
                 Objects.equals(workType, entity.workType);
     }
 

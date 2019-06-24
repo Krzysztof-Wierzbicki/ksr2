@@ -7,9 +7,10 @@ public class EntityDB {
     public int age;
     public String maritalStatus;
     public int numberOfKids;
-    public String schoolType;
-    public int maxGrade;
-    public boolean completed;
+    //public String schoolType;
+    //public int maxGrade;
+    //public boolean completed;
+    public int yearsOfEducation;
     public String degree;
     public String pregnancyCount;
     public String marriageCount;
@@ -21,7 +22,7 @@ public class EntityDB {
     public String earnings;
 
     public EntityDB(int id, String race, int age, String maritalStatus, int numberOfKids,
-                    String schoolType, int maxGrade, boolean completed, String degree,
+                    int yearsOfEducation, String degree,
                     String pregnancyCount, String marriageCount, String religion,
                     boolean everWorked, String workType, String weight, String height, String earnings) {
         this.id = id;
@@ -29,9 +30,10 @@ public class EntityDB {
         this.age = age;
         this.maritalStatus = maritalStatus;
         this.numberOfKids = numberOfKids;
-        this.schoolType = schoolType;
-        this.maxGrade = maxGrade;
-        this.completed = completed;
+        //this.schoolType = schoolType;
+        //this.maxGrade = maxGrade;
+        //this.completed = completed;
+        this.yearsOfEducation = yearsOfEducation;
         this.degree = degree;
         this.pregnancyCount = pregnancyCount;
         this.marriageCount = marriageCount;
@@ -51,9 +53,10 @@ public class EntityDB {
                 ", age=" + age +
                 ", maritalStatus='" + maritalStatus +
                 ", numberOfKids=" + numberOfKids +
-                ", schoolType='" + schoolType +
-                ", maxGrade=" + maxGrade +
-                ", completed=" + completed +
+                //", schoolType='" + schoolType +
+                //", maxGrade=" + maxGrade +
+                //", completed=" + completed +
+                ", yearsOfEducation=" + yearsOfEducation +
                 ", degree='" + degree +
                 ", pregnancyCount='" + pregnancyCount +
                 ", marriageCount='" + marriageCount +

@@ -26,18 +26,19 @@ public class Loader {
                     resultSet.getInt(3),
                     resultSet.getString(4),
                     resultSet.getInt(5),
-                    resultSet.getString(6),
-                    resultSet.getInt(7),
-                    resultSet.getBoolean(8),
+                    //resultSet.getString(6),
+                    //resultSet.getInt(7),
+                    //resultSet.getBoolean(8),
+                    resultSet.getInt(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
                     resultSet.getString(9),
                     resultSet.getString(10),
-                    resultSet.getString(11),
+                    resultSet.getBoolean(11),
                     resultSet.getString(12),
-                    resultSet.getBoolean(13),
+                    resultSet.getString(13),
                     resultSet.getString(14),
-                    resultSet.getString(15),
-                    resultSet.getString(16),
-                    resultSet.getString(17)
+                    resultSet.getString(15)
             );
             entityDBs.add(entityDB);
         }
