@@ -144,8 +144,10 @@ public class StaticVariable {
     static Function<Entity, Double> mediumDegreeFunction = entity -> {
         if(entity.degree == Degree.bachelor){
             return 0.5;
-        }else if(entity.degree == Degree.master){
+        }else if(entity.degree == Degree.master) {
             return 1.;
+        }else if(entity.degree == Degree.professional){
+            return 0.8;
         }else if(entity.degree == Degree.doctorate){
             return 0.2;
         }
@@ -153,9 +155,9 @@ public class StaticVariable {
     };
     static Function<Entity, Double> higherDegreeFunction = entity -> {
         if(entity.degree == Degree.doctorate){
-            return 0.8;
-        }else if(entity.degree == Degree.professional){
             return 1.;
+        }else if(entity.degree == Degree.professional){
+            return 0.7;
         }
         return 0.;
     };
